@@ -12,7 +12,8 @@ from experiments.wrappers import ShuffleNeighboursObs, StopGoLeaderWrapper
 
 ENV_ID = "highway-v0"
 
-SCENARIO_NAME = "cf_obs15_shuffle"
+import os
+SCENARIO_NAME = os.getenv("SCENARIO_NAME", "cf_obs15_shuffle")
 ENV_CONFIG = SCENARIOS[SCENARIO_NAME]["config"]
 
 # Wrapper selection (0 or 1 wrapper. simple for SubprocVecEnv on Windows)
@@ -30,8 +31,8 @@ EXP_ID = f"{SCENARIO_NAME}_v1"
 BASE_RUN_NAME = f"ppo_baseline_{EXP_ID}"
 
 SEEDS = [0, 1, 2]
-TOTAL_TIMESTEPS = 500_000
-N_ENVS = 4
+TOTAL_TIMESTEPS = int(os.getenv("TOTAL_TIMESTEPS", "500000"))
+N_ENVS = int(os.getenv("N_ENVS", "4"))
 
 # Parallel environments (Must be under __main__)
 if __name__ == "__main__":

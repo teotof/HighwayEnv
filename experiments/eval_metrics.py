@@ -8,7 +8,8 @@ from experiments.wrappers import ShuffleNeighboursObs, StopGoLeaderWrapper
 
 ENV_ID = "highway-v0"
 
-SCENARIO_NAME = "cf_obs15_shuffle"
+import os
+SCENARIO_NAME = os.getenv("SCENARIO_NAME", "cf_obs15_shuffle")
 ENV_CONFIG = SCENARIOS[SCENARIO_NAME]["config"]
 
 WRAPPER_NAME = SCENARIOS[SCENARIO_NAME]["wrapper"]
