@@ -3,26 +3,35 @@ import gymnasium as gym
 import highway_env
 from stable_baselines3 import PPO
 
+from experiments.scenarios import SCENARIOS
+from experiments.wrappers import ShuffleNeighboursObs, StopGoLeaderWrapper
+
 ENV_ID = "highway-v0"
-ENV_CONFIG = {
-    "action": {"type": "ContinuousAction", "longitudinal": True, "lateral": False},
-    "observation": {
-        "type": "Kinematics",
-        "vehicles_count": 5,
-        "features": ["presence", "x", "y", "vx", "vy"],
-        "absolute": False,
-    },
+
+SCENARIO_NAME = "cf_obs15_shuffle"
+ENV_CONFIG = SCENARIOS[SCENARIO_NAME]["config"]
+
+WRAPPER_NAME = SCENARIOS[SCENARIO_NAME]["wrapper"]
+WRAPPER_KWARGS = SCENARIOS[SCENARIO_NAME]["wrapper_kwargs"]
+
+WRAPPER_MAP = {
+    None: None,
+    "ShuffleNeighboursObs": ShuffleNeighboursObs,
+    "StopGoLeaderWrapper": StopGoLeaderWrapper,
 }
+WRAPPER_CLASS = WRAPPER_MAP[WRAPPER_NAME]
 
 N_EVAL_EPISODES = 50
 SEEDS = [0, 1, 2]
 
-EXP_ID = "cf_v2"
+EXP_ID = f"{SCENARIO_NAME}_v1"
 BASELINE_PREFIX = f"runs/models/ppo_baseline_{EXP_ID}_seed"
 ATTN_PREFIX = f"runs/models/ppo_attn_{EXP_ID}_seed"
 
 def eval_one(model_path: str, seed: int):
     env = gym.make(ENV_ID, config=ENV_CONFIG)
+    if WRAPPER_CLASS is not None:
+        env = WRAPPER_CLASS(env, **WRAPPER_KWARGS)
     model = PPO.load(model_path)
 
     returns = []

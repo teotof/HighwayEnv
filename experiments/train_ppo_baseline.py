@@ -7,22 +7,31 @@ from stable_baselines3 import PPO
 from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.vec_env import SubprocVecEnv
 
+from experiments.scenarios import SCENARIOS
+from experiments.wrappers import ShuffleNeighboursObs, StopGoLeaderWrapper
+
 ENV_ID = "highway-v0"
 
-ENV_CONFIG = {
-    "action": {"type": "ContinuousAction", "longitudinal": True, "lateral": False},
-    "observation": {
-        "type": "Kinematics",
-        "vehicles_count": 5,
-        "features": ["presence", "x", "y", "vx", "vy"],
-        "absolute": False,
-    },
-}
+SCENARIO_NAME = "cf_obs15_shuffle"
+ENV_CONFIG = SCENARIOS[SCENARIO_NAME]["config"]
 
-EXP_ID = "cf_v2"
+# Wrapper selection (0 or 1 wrapper. simple for SubprocVecEnv on Windows)
+WRAPPER_NAME = SCENARIOS[SCENARIO_NAME]["wrapper"]
+WRAPPER_KWARGS = SCENARIOS[SCENARIO_NAME]["wrapper_kwargs"]
+
+WRAPPER_MAP = {
+    None: None,
+    "ShuffleNeighboursObs": ShuffleNeighboursObs,
+    "StopGoLeaderWrapper": StopGoLeaderWrapper,
+}
+WRAPPER_CLASS = WRAPPER_MAP[WRAPPER_NAME]
+
+EXP_ID = f"{SCENARIO_NAME}_v1"
 BASE_RUN_NAME = f"ppo_baseline_{EXP_ID}"
+
 SEEDS = [0, 1, 2]
 TOTAL_TIMESTEPS = 500_000
+N_ENVS = 4
 
 # Parallel environments (Must be under __main__)
 if __name__ == "__main__":
@@ -37,11 +46,13 @@ if __name__ == "__main__":
 
         env = make_vec_env(
             ENV_ID,
-            n_envs=4,
+            n_envs=N_ENVS,
             vec_env_cls=SubprocVecEnv,
             env_kwargs={"config": ENV_CONFIG},
             monitor_dir=f"runs/monitor/{run_name}",
             seed=seed,
+            wrapper_class=WRAPPER_CLASS,
+            wrapper_kwargs=WRAPPER_KWARGS,
         )
 
         model = PPO(
