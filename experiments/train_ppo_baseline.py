@@ -41,6 +41,8 @@ if __name__ == "__main__":
 
         # Sanity Check
         test_env = gym.make(ENV_ID, config=ENV_CONFIG)
+        if WRAPPER_CLASS is not None:
+            test_env = WRAPPER_CLASS(test_env, **WRAPPER_KWARGS)
         obs, _ = test_env.reset(seed=seed)
         print(run_name, "obs shape:", obs.shape, "action space:", test_env.action_space)
         test_env.close()
