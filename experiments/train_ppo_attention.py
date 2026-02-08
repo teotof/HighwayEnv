@@ -12,22 +12,24 @@ from experiments.wrappers import ShuffleNeighboursObs, StopGoLeaderWrapper
 ENV_ID = "highway-v0"
 
 import os
-SCENARIO_NAME = os.getenv("SCENARIO_NAME", "cf_obs15_shuffle")
-ENV_CONFIG = SCENARIOS[SCENARIO_NAME]["config"]
+SCENARIO_NAME = os.getenv("SCENARIO_NAME", "cf_v2")
+scenario = SCENARIOS[SCENARIO_NAME]
+
+ENV_ID = scenario["env_id"]
+ENV_CONFIG = scenario["config"]
 
 # Wrapper selection (0 or 1 wrapper. simple for SubprocVecEnv on Windows)
-WRAPPER_NAME = SCENARIOS[SCENARIO_NAME]["wrapper"]
-WRAPPER_KWARGS = SCENARIOS[SCENARIO_NAME]["wrapper_kwargs"]
+WRAPPER_NAME = scenario.get("wrapper", None)
+WRAPPER_KWARGS = scenario.get("wrapper_kwargs", {})
 
 WRAPPER_MAP = {
     None: None,
     "ShuffleNeighboursObs": ShuffleNeighboursObs,
     "StopGoLeaderWrapper": StopGoLeaderWrapper,
 }
-WRAPPER_CLASS = WRAPPER_MAP[WRAPPER_NAME]
+WRAPPER_CLASS = WRAPPER_MAP.get(WRAPPER_NAME)
 
-EXP_ID = f"{SCENARIO_NAME}_v1"
-BASE_RUN_NAME = f"ppo_attn_{EXP_ID}"
+EXP_VERSION = os.getenv("EXP_VERSION", "v2")
 
 SEEDS = [0, 1, 2]
 TOTAL_TIMESTEPS = int(os.getenv("TOTAL_TIMESTEPS", "500000"))
@@ -35,7 +37,7 @@ N_ENVS = int(os.getenv("N_ENVS", "4"))
 
 if __name__ == "__main__":
     for seed in SEEDS:
-        run_name = f"{BASE_RUN_NAME}_seed{seed}"
+        run_name = f"ppo_attn_{SCENARIO_NAME}_{EXP_VERSION}_seed{seed}"
 
         # Sanity Check
         test_env = gym.make(ENV_ID, config=ENV_CONFIG)

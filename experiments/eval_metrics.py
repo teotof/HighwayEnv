@@ -1,39 +1,47 @@
+import os
 import numpy as np
 import gymnasium as gym
-import highway_env
+import highway_env  # registers envs
 from stable_baselines3 import PPO
 
 from experiments.scenarios import SCENARIOS
 from experiments.wrappers import ShuffleNeighboursObs, StopGoLeaderWrapper
 
-ENV_ID = "highway-v0"
+# Which models to load (training) vs which env to test in (evaluation)
+TRAIN_SCENARIO_NAME = os.getenv("TRAIN_SCENARIO_NAME", os.getenv("SCENARIO_NAME", "cf_obs15_shuffle"))
+EVAL_SCENARIO_NAME  = os.getenv("EVAL_SCENARIO_NAME", TRAIN_SCENARIO_NAME)
 
-import os
-SCENARIO_NAME = os.getenv("SCENARIO_NAME", "cf_obs15_shuffle")
-ENV_CONFIG = SCENARIOS[SCENARIO_NAME]["config"]
+EXP_VERSION = os.getenv("EXP_VERSION", "v2")  # must match training run names
+TRAIN_EXP_ID = f"{TRAIN_SCENARIO_NAME}_{EXP_VERSION}"
 
-WRAPPER_NAME = SCENARIOS[SCENARIO_NAME]["wrapper"]
-WRAPPER_KWARGS = SCENARIOS[SCENARIO_NAME]["wrapper_kwargs"]
+BASELINE_PREFIX = f"runs/models/ppo_baseline_{TRAIN_EXP_ID}_seed"
+ATTN_PREFIX     = f"runs/models/ppo_attn_{TRAIN_EXP_ID}_seed"
+
+# Build evaluation env from EVAL_SCENARIO_NAME
+scenario_eval = SCENARIOS[EVAL_SCENARIO_NAME]
+ENV_ID = scenario_eval["env_id"]
+ENV_CONFIG = scenario_eval["config"]
+
+WRAPPER_NAME = scenario_eval.get("wrapper", None)
+WRAPPER_KWARGS = scenario_eval.get("wrapper_kwargs", {})
 
 WRAPPER_MAP = {
     None: None,
     "ShuffleNeighboursObs": ShuffleNeighboursObs,
     "StopGoLeaderWrapper": StopGoLeaderWrapper,
 }
-WRAPPER_CLASS = WRAPPER_MAP[WRAPPER_NAME]
+WRAPPER_CLASS = WRAPPER_MAP.get(WRAPPER_NAME)
 
-N_EVAL_EPISODES = 50
+N_EVAL_EPISODES = int(os.getenv("N_EVAL_EPISODES", "50"))
 SEEDS = [0, 1, 2]
 
-EXP_ID = f"{SCENARIO_NAME}_v1"
-BASELINE_PREFIX = f"runs/models/ppo_baseline_{EXP_ID}_seed"
-ATTN_PREFIX = f"runs/models/ppo_attn_{EXP_ID}_seed"
 
 def eval_one(model_path: str, seed: int):
     env = gym.make(ENV_ID, config=ENV_CONFIG)
     if WRAPPER_CLASS is not None:
         env = WRAPPER_CLASS(env, **WRAPPER_KWARGS)
-    model = PPO.load(model_path)
+
+    model = PPO.load(model_path, device="cpu")
 
     returns = []
     lengths = []
@@ -41,20 +49,20 @@ def eval_one(model_path: str, seed: int):
 
     for ep in range(N_EVAL_EPISODES):
         obs, info = env.reset(seed=seed * 1000 + ep)
-        done = truncated = False
+        terminated = truncated = False
         ep_return = 0.0
         ep_len = 0
 
-        while not (done or truncated):
+        while not (terminated or truncated):
             action, _ = model.predict(obs, deterministic=True)
-            obs, reward, done, truncated, info = env.step(action)
+            obs, reward, terminated, truncated, info = env.step(action)
             ep_return += float(reward)
             ep_len += 1
 
         returns.append(ep_return)
         lengths.append(ep_len)
 
-        # highway-env sets a 'crashed' flag on the ego vehicle
+         # highway-env sets a "crashed" flag on the ego vehicle
         crashed = bool(env.unwrapped.vehicle.crashed)
         crashes += int(crashed)
 
@@ -67,6 +75,7 @@ def eval_one(model_path: str, seed: int):
         "crash_rate": float(crashes / N_EVAL_EPISODES),
     }
 
+
 def summarize(label: str, results: list[dict]):
     mean_returns = [r["mean_return"] for r in results]
     crash_rates = [r["crash_rate"] for r in results]
@@ -77,7 +86,11 @@ def summarize(label: str, results: list[dict]):
     print(f"  crash_rate: {np.mean(crash_rates):.3f} ± {np.std(crash_rates):.3f}")
     print(f"  ep_len:     {np.mean(mean_lens):.3f} ± {np.std(mean_lens):.3f}")
 
+
 if __name__ == "__main__":
+    print(f"Loading models trained on: {TRAIN_SCENARIO_NAME} (EXP_VERSION={EXP_VERSION})")
+    print(f"Evaluating in env: {EVAL_SCENARIO_NAME} -> {ENV_ID}")
+
     baseline_results = []
     attn_results = []
 

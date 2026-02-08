@@ -76,7 +76,9 @@ class StopGoLeaderWrapper(gym.Wrapper):
                 self.leader.target_speed = new_v
             elif hasattr(self.leader, "speed"):
                 # fallback (less realistic, but keeps the idea)
-                self.leader.speed = min(self.leader.speed, new_v)
+                if hasattr(self.leader, "target_speed"):
+                    self.leader.target_speed = new_v
+                self.leader.speed = new_v
 
         return obs, reward, terminated, truncated, info
 
