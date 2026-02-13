@@ -33,6 +33,7 @@ WRAPPER_MAP = {
 WRAPPER_CLASS = WRAPPER_MAP.get(WRAPPER_NAME)
 
 N_EVAL_EPISODES = int(os.getenv("N_EVAL_EPISODES", "50"))
+MAX_STEPS = int(os.getenv("MAX_STEPS", "0"))  # 0 means "auto from env config"
 SEEDS = [0, 1, 2]
 
 
@@ -40,6 +41,13 @@ def eval_one(model_path: str, seed: int):
     env = gym.make(ENV_ID, config=ENV_CONFIG)
     if WRAPPER_CLASS is not None:
         env = WRAPPER_CLASS(env, **WRAPPER_KWARGS)
+    
+    # Safety cap so eval cannot get stuck if terminated/truncated never becomes True
+    if MAX_STEPS > 0:
+        max_steps = MAX_STEPS
+    else:
+        # highway-env config often has "duration" (in steps)
+        max_steps = int(env.unwrapped.config.get("duration", 200))
 
     model = PPO.load(model_path, device="cpu")
 
@@ -53,7 +61,7 @@ def eval_one(model_path: str, seed: int):
         ep_return = 0.0
         ep_len = 0
 
-        while not (terminated or truncated):
+        while not (terminated or truncated) and ep_len < max_steps:
             action, _ = model.predict(obs, deterministic=True)
             obs, reward, terminated, truncated, info = env.step(action)
             ep_return += float(reward)
@@ -62,9 +70,13 @@ def eval_one(model_path: str, seed: int):
         returns.append(ep_return)
         lengths.append(ep_len)
 
-         # highway-env sets a "crashed" flag on the ego vehicle
-        crashed = bool(env.unwrapped.vehicle.crashed)
+        crashed = False
+        if hasattr(env.unwrapped, "vehicle") and env.unwrapped.vehicle is not None:
+            crashed = bool(getattr(env.unwrapped.vehicle, "crashed", False))
         crashes += int(crashed)
+
+        if ep % 5 == 0:
+            print(f"[{os.path.basename(model_path)}] seed={seed} ep={ep}/{N_EVAL_EPISODES}", flush=True)
 
     env.close()
 
