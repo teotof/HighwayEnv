@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/home/users/hadjitot/fyp/HighwayEnv/experiments/eval_attention.py", line 83, in <module>
+    main()
+  File "/home/users/hadjitot/fyp/HighwayEnv/experiments/eval_attention.py", line 32, in main
+    env = gym.make(ENV_ID, config=ENV_CONFIG, render_mode=None)
+  File "/home/users/hadjitot/.conda/envs/highwayfyp/lib/python3.10/site-packages/gymnasium/envs/registration.py", line 681, in make
+    env_spec = _find_spec(id)
+  File "/home/users/hadjitot/.conda/envs/highwayfyp/lib/python3.10/site-packages/gymnasium/envs/registration.py", line 526, in _find_spec
+    _check_version_exists(ns, name, version)
+  File "/home/users/hadjitot/.conda/envs/highwayfyp/lib/python3.10/site-packages/gymnasium/envs/registration.py", line 392, in _check_version_exists
+    _check_name_exists(ns, name)
+  File "/home/users/hadjitot/.conda/envs/highwayfyp/lib/python3.10/site-packages/gymnasium/envs/registration.py", line 369, in _check_name_exists
+    raise error.NameNotFound(
+gymnasium.error.NameNotFound: Environment `merge` doesn't exist.
