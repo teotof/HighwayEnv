@@ -44,14 +44,12 @@ def main():
 
         # Extract attention weights (batch=1)
         attn = model.policy.features_extractor.last_attention
+        # Log neighbour relative x positions for context (slots 1..4)
+        # features: [presence, x, y, vx, vy] => x is column 1
         if attn is not None:
             attn_log.append(attn.squeeze(0).cpu().numpy())      # (N,)
             dx_log.append(obs[1:, 1].copy())                    # (N,) neighbour x
             presence_log.append(obs[1:, 0].copy())              # (N,) presence
-
-        # Log neighbour relative x positions for context (slots 1..4)
-        # features: [presence, x, y, vx, vy] => x is column 1
-        dx_log.append(obs[1:, 1].copy())
 
         time.sleep(1/30)
 
