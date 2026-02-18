@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import gymnasium as gym
+import highway_env  # registers highway/merge env IDs in gymnasium
 from stable_baselines3 import PPO
 
 from experiments.scenarios import SCENARIOS
@@ -29,6 +30,9 @@ WRAPPER_CLASS = WRAPPER_MAP.get(scenario.get("wrapper", None))
 WRAPPER_KWARGS = scenario.get("wrapper_kwargs", {})
 
 def main():
+    if not os.path.isfile(MODEL_PATH):
+        raise FileNotFoundError(f"Model not found: {MODEL_PATH}")
+
     env = gym.make(ENV_ID, config=ENV_CONFIG, render_mode=None)
     if WRAPPER_CLASS is not None:
         env = WRAPPER_CLASS(env, **WRAPPER_KWARGS)
@@ -36,13 +40,21 @@ def main():
     obs, info = env.reset(seed=SEED)
     model = PPO.load(MODEL_PATH, device="cpu")
 
-    print("Env obs shape:", obs.shape)
-    print("Model obs space:", model.observation_space)
+    env_obs_shape = tuple(obs.shape)
+    model_obs_shape = tuple(model.observation_space.shape)
 
-    assert obs.shape == model.observation_space.shape, (
-        f"Mismatch: env obs {obs.shape} vs model {model.observation_space.shape}. "
-        f"MODEL_PATH={MODEL_PATH}"
-    )
+    print(f"SCENARIO_NAME={SCENARIO_NAME} SEED={SEED}")
+    print(f"Resolved MODEL_PATH={os.path.abspath(MODEL_PATH)}")
+    print("Env obs shape:", env_obs_shape)
+    print("Model obs shape:", model_obs_shape)
+
+    if env_obs_shape != model_obs_shape:
+        raise ValueError(
+            "Observation mismatch: "
+            f"env obs {env_obs_shape} vs model obs {model_obs_shape}. "
+            f"MODEL_PATH={MODEL_PATH}. "
+            "This usually means the wrong checkpoint was loaded for the scenario."
+        )
 
     attn_log, dx_log, presence_log = [], [], []
 
