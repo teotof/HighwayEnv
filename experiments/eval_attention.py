@@ -10,10 +10,17 @@ from experiments.wrappers import ShuffleNeighboursObs, StopGoLeaderWrapper
 SCENARIO_NAME = os.getenv("SCENARIO_NAME", "cf_v2")
 EXP_VERSION = os.getenv("EXP_VERSION", "v2")
 SEED = int(os.getenv("SEED", "0"))
+ATTN_MODE = os.getenv("ATTN_MODE", "").strip()
+
+if ATTN_MODE:
+    default_model_path = f"runs/models/ppo_attn_{ATTN_MODE}_{SCENARIO_NAME}_{EXP_VERSION}_seed{SEED}.zip"
+else:
+    # Backward-compatible default for older runs.
+    default_model_path = f"runs/models/ppo_attn_{SCENARIO_NAME}_{EXP_VERSION}_seed{SEED}.zip"
 
 MODEL_PATH = os.getenv(
     "MODEL_PATH",
-    f"runs/models/ppo_attn_{SCENARIO_NAME}_{EXP_VERSION}_seed{SEED}.zip"
+    default_model_path
 )
 STEPS = int(os.getenv("STEPS", "1000"))
 
@@ -43,7 +50,7 @@ def main():
     env_obs_shape = tuple(obs.shape)
     model_obs_shape = tuple(model.observation_space.shape)
 
-    print(f"SCENARIO_NAME={SCENARIO_NAME} SEED={SEED}")
+    print(f"SCENARIO_NAME={SCENARIO_NAME} SEED={SEED} ATTN_MODE={ATTN_MODE if ATTN_MODE else 'legacy-name'}")
     print(f"Resolved MODEL_PATH={os.path.abspath(MODEL_PATH)}")
     print("Env obs shape:", env_obs_shape)
     print("Model obs shape:", model_obs_shape)
@@ -84,7 +91,10 @@ def main():
     dx_log = np.array(dx_log)
     presence_log = np.array(presence_log)
 
-    out_dir = f"runs/attn_logs/{SCENARIO_NAME}/seed{SEED}"
+    if ATTN_MODE:
+        out_dir = f"runs/attn_logs/{ATTN_MODE}/{SCENARIO_NAME}/seed{SEED}"
+    else:
+        out_dir = f"runs/attn_logs/{SCENARIO_NAME}/seed{SEED}"
     os.makedirs(out_dir, exist_ok=True)
     np.save(f"{out_dir}/attention.npy", attn_log)
     np.save(f"{out_dir}/dx.npy", dx_log)

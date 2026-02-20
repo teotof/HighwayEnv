@@ -8,7 +8,12 @@ def entropy(p, eps=1e-12):
 def main():
     scenario = os.environ["SCENARIO_NAME"]
     seed = int(os.environ["SEED"])
-    base = f"runs/attn_logs/{scenario}/seed{seed}"
+    attn_mode = os.getenv("ATTN_MODE", "").strip()
+
+    if attn_mode:
+        base = f"runs/attn_logs/{attn_mode}/{scenario}/seed{seed}"
+    else:
+        base = f"runs/attn_logs/{scenario}/seed{seed}"
 
     attn = np.load(f"{base}/attention.npy")     # (T, N)
     dx = np.load(f"{base}/dx.npy")              # (T, N)

@@ -14,6 +14,8 @@ ENV_ID = "highway-v0"
 import os
 SCENARIO_NAME = os.getenv("SCENARIO_NAME", "cf_v2")
 scenario = SCENARIOS[SCENARIO_NAME]
+ATTN_MODE = os.getenv("ATTN_MODE", "learned")
+X_INDEX = int(os.getenv("X_INDEX", "1"))
 
 ENV_ID = scenario["env_id"]
 ENV_CONFIG = scenario["config"]
@@ -37,7 +39,7 @@ N_ENVS = int(os.getenv("N_ENVS", "4"))
 
 if __name__ == "__main__":
     for seed in SEEDS:
-        run_name = f"ppo_attn_{SCENARIO_NAME}_{EXP_VERSION}_seed{seed}"
+        run_name = f"ppo_attn_{ATTN_MODE}_{SCENARIO_NAME}_{EXP_VERSION}_seed{seed}"
 
         # Sanity Check
         test_env = gym.make(ENV_ID, config=ENV_CONFIG)
@@ -60,7 +62,12 @@ if __name__ == "__main__":
 
         policy_kwargs = dict(
             features_extractor_class=KinematicAttentionExtractor,
-            features_extractor_kwargs=dict(features_dim=128, d_model=32),
+            features_extractor_kwargs=dict(
+                features_dim=128,
+                d_model=32,
+                mode=ATTN_MODE,
+                x_index=X_INDEX,
+            ),
         )
 
         model = PPO(
