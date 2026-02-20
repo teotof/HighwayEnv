@@ -1,0 +1,104 @@
+Loading Anaconda 3 2024.02-1
+Loading Anaconda 3 2024.02-1
+SCENARIO_NAME=cf_v2
+SEED=0
+EXP_VERSION=v2
+MODEL_PATH=runs/models/ppo_attn_cf_v2_v2_seed0.zip
+STEPS=10000
+OUT_DIR=runs/attn_logs/cf_v2/seed0
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 140831 (attnlog_cf_v2_seed0_v2) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Wed Feb 18 19:20:41 GMT 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 140831
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: RUNNING
+Nodes: 1
+Cores per node: 4
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 00:02:44 core-walltime
+Job Wall-clock time: 00:00:41
+Memory Utilized: 0.00 MB
+Memory Efficiency: 0.00% of 32.00 GB (32.00 GB/node)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+140831       attnlog_c+         4             1                                                      00:00:41    RUNNING      0:0 
+140831.batch      batch         4      1      1                                                      00:00:41    RUNNING      0:0 
+140831.exte+     extern         4      1      1                                                      00:00:41    RUNNING      0:0 
+
+
+Job details:
+============
+
+JobId=140831 JobName=attnlog_cf_v2_seed0_v2
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=112412 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=00:01:16 TimeLimit=1-00:00:00 TimeMin=N/A
+   SubmitTime=2026-02-18T19:19:08 EligibleTime=2026-02-18T19:19:08
+   AccrueTime=2026-02-18T19:19:08
+   StartTime=2026-02-18T19:19:25 EndTime=2026-02-18T19:20:41 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-02-18T19:19:25 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=callan01:3896046
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n02
+   BatchHost=callan-n02
+   NumNodes=1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=4,mem=32G,node=1,billing=4
+   AllocTRES=cpu=4,mem=32G,node=1,billing=4
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n02 CPU_IDs=15-18 Mem=32768 GRES=
+   MinCPUsNode=4 MinMemoryNode=32G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/eval_attention.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/attnlog_cf_v2_seed0_v2_140831.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/attnlog_cf_v2_seed0_v2_140831.out
+   TresPerTask=cpu=4
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4777145          0          0       1708     none |   363612       0        0      891     none
+root       FILESET     4756035          0          0       3090     none |  9482441       0        0      982     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot       7,441 | CALLAN_HADJITOT     7,441 |       300,000   292,559
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################

@@ -2,9 +2,9 @@
 #SBATCH -J attnlog
 #SBATCH -p compute
 #SBATCH -n 1
-#SBATCH -c 4
+#SBATCH -c 16
 #SBATCH --mem=32G
-#SBATCH -t 1-00:00:00
+#SBATCH -t 2-00:00:00
 #SBATCH -o /home/users/hadjitot/fyp/HighwayEnv/slurm_out/%x_%j.out
 #SBATCH -e /home/users/hadjitot/fyp/HighwayEnv/slurm_out/%x_%j.err
 
