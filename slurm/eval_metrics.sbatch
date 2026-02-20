@@ -17,5 +17,16 @@ cd /home/users/hadjitot/fyp/HighwayEnv
 export PYTHONPATH=$PWD
 export OMP_NUM_THREADS=1
 
+: "${TRAIN_SCENARIO_NAME:=cf_v2}"
+: "${EVAL_SCENARIO_NAME:=$TRAIN_SCENARIO_NAME}"
+: "${EXP_VERSION:=v2}"
+: "${ATTN_MODE:=}"
+export TRAIN_SCENARIO_NAME EVAL_SCENARIO_NAME EXP_VERSION ATTN_MODE
+
+echo "TRAIN_SCENARIO_NAME=$TRAIN_SCENARIO_NAME"
+echo "EVAL_SCENARIO_NAME=$EVAL_SCENARIO_NAME"
+echo "EXP_VERSION=$EXP_VERSION"
+echo "ATTN_MODE=${ATTN_MODE:-legacy-name}"
+
 python experiments/eval_metrics.py
 

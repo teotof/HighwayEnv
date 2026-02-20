@@ -13,9 +13,16 @@ EVAL_SCENARIO_NAME  = os.getenv("EVAL_SCENARIO_NAME", TRAIN_SCENARIO_NAME)
 
 EXP_VERSION = os.getenv("EXP_VERSION", "v2")  # must match training run names
 TRAIN_EXP_ID = f"{TRAIN_SCENARIO_NAME}_{EXP_VERSION}"
+ATTN_MODE = os.getenv("ATTN_MODE", "").strip()
 
 BASELINE_PREFIX = f"runs/models/ppo_baseline_{TRAIN_EXP_ID}_seed"
-ATTN_PREFIX     = f"runs/models/ppo_attn_{TRAIN_EXP_ID}_seed"
+if ATTN_MODE:
+    ATTN_PREFIX = f"runs/models/ppo_attn_{ATTN_MODE}_{TRAIN_EXP_ID}_seed"
+    ATTN_LABEL = f"ATTENTION ({ATTN_MODE})"
+else:
+    # Backward-compatible path for older runs without mode in name.
+    ATTN_PREFIX = f"runs/models/ppo_attn_{TRAIN_EXP_ID}_seed"
+    ATTN_LABEL = "ATTENTION"
 
 # Build evaluation env from EVAL_SCENARIO_NAME
 scenario_eval = SCENARIOS[EVAL_SCENARIO_NAME]
@@ -102,6 +109,7 @@ def summarize(label: str, results: list[dict]):
 if __name__ == "__main__":
     print(f"Loading models trained on: {TRAIN_SCENARIO_NAME} (EXP_VERSION={EXP_VERSION})")
     print(f"Evaluating in env: {EVAL_SCENARIO_NAME} -> {ENV_ID}")
+    print(f"Attention mode: {ATTN_MODE if ATTN_MODE else 'legacy-name'}")
 
     baseline_results = []
     attn_results = []
@@ -114,4 +122,4 @@ if __name__ == "__main__":
         attn_results.append(eval_one(attn_path, seed))
 
     summarize("BASELINE", baseline_results)
-    summarize("ATTENTION", attn_results)
+    summarize(ATTN_LABEL, attn_results)

@@ -31,18 +31,28 @@ export NUMEXPR_NUM_THREADS=1
 : "${STEPS:=10000}"
 : "${SCENARIO_NAME:=cf_v2}"
 : "${SEED:=0}"
+: "${ATTN_MODE:=}"
 
-: "${MODEL_PATH:=runs/models/ppo_attn_${SCENARIO_NAME}_${EXP_VERSION}_seed${SEED}.zip}"
+if [ -n "${ATTN_MODE}" ]; then
+  : "${MODEL_PATH:=runs/models/ppo_attn_${ATTN_MODE}_${SCENARIO_NAME}_${EXP_VERSION}_seed${SEED}.zip}"
+else
+  : "${MODEL_PATH:=runs/models/ppo_attn_${SCENARIO_NAME}_${EXP_VERSION}_seed${SEED}.zip}"
+fi
 
 # IMPORTANT: export so Python sees them
-export EXP_VERSION STEPS SCENARIO_NAME SEED MODEL_PATH
+export EXP_VERSION STEPS SCENARIO_NAME SEED ATTN_MODE MODEL_PATH
 
-OUT_DIR="runs/attn_logs/${SCENARIO_NAME}/seed${SEED}"
+if [ -n "${ATTN_MODE}" ]; then
+  OUT_DIR="runs/attn_logs/${ATTN_MODE}/${SCENARIO_NAME}/seed${SEED}"
+else
+  OUT_DIR="runs/attn_logs/${SCENARIO_NAME}/seed${SEED}"
+fi
 mkdir -p "$OUT_DIR"
 
 echo "SCENARIO_NAME=$SCENARIO_NAME"
 echo "SEED=$SEED"
 echo "EXP_VERSION=$EXP_VERSION"
+echo "ATTN_MODE=${ATTN_MODE:-legacy-name}"
 echo "MODEL_PATH=$MODEL_PATH"
 echo "STEPS=$STEPS"
 echo "OUT_DIR=$OUT_DIR"
