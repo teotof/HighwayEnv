@@ -19,6 +19,9 @@ class KinematicAttentionExtractor(BaseFeaturesExtractor):
         d_model: int = 32,
         mode: str = "learned",
         x_index: int = 1,
+        vx_index: int = 3,
+        oracle_rule: str = "leader_x",
+        ttc_eps: float = 1e-6,
     ):
         super().__init__(observation_space, features_dim)
 
@@ -39,6 +42,11 @@ class KinematicAttentionExtractor(BaseFeaturesExtractor):
         if self.mode not in {"learned", "uniform", "oracle"}:
             raise ValueError(f"Unknown attention mode '{mode}'. Use learned|uniform|oracle.")
         self.x_index = int(x_index)
+        self.vx_index = int(vx_index)
+        self.oracle_rule = str(oracle_rule).lower()
+        if self.oracle_rule not in {"leader_x", "ttc"}:
+            raise ValueError(f"Unknown oracle_rule '{oracle_rule}'. Use leader_x|ttc.")
+        self.ttc_eps = float(ttc_eps)
 
         # Embed each vehicle feature vector -> d_model
         self.embed = nn.Linear(self.feat_dim, d_model)
@@ -85,23 +93,34 @@ class KinematicAttentionExtractor(BaseFeaturesExtractor):
             attn = torch.where(denom > 0, attn / denom, torch.zeros_like(attn))
 
         elif self.mode == "oracle":
-            # Leader heuristic: nearest in front (min positive dx), else nearest by |dx|.
+            # Fallback heuristic: nearest in front (min positive dx), else nearest by |dx|.
             dx = nei[:, :, self.x_index]  # (B, N)
             dx_valid = dx.masked_fill(~mask, float("inf"))
-
             front = dx_valid > 0
             front_dx = torch.where(front, dx_valid, torch.full_like(dx_valid, float("inf")))
             has_front = torch.isfinite(front_dx).any(dim=1)
+            idx_front = torch.argmin(front_dx, dim=1)           # (B,)
+            idx_abs = torch.argmin(torch.abs(dx_valid), dim=1)  # (B,)
+            fallback_idx = torch.where(has_front, idx_front, idx_abs)
 
-            idx_front = torch.argmin(front_dx, dim=1)          # (B,)
-            idx_abs = torch.argmin(torch.abs(dx_valid), dim=1) # (B,)
-            leader_idx = torch.where(has_front, idx_front, idx_abs)
+            if self.oracle_rule == "ttc":
+                # Longitudinal TTC proxy using relative x and relative vx.
+                # With relative features, dx_dot ~= dvx. A pair is "closing" if dx * dvx < 0.
+                dvx = nei[:, :, self.vx_index]  # (B, N)
+                closing = mask & ((dx * dvx) < 0)
+                ttc = torch.abs(dx) / (torch.abs(dvx) + self.ttc_eps)
+                ttc = ttc.masked_fill(~closing, float("inf"))
+                has_ttc = torch.isfinite(ttc).any(dim=1)
+                idx_ttc = torch.argmin(ttc, dim=1)
+                oracle_idx = torch.where(has_ttc, idx_ttc, fallback_idx)
+            else:
+                oracle_idx = fallback_idx
 
             attn = torch.zeros_like(dx_valid)
             has_valid = mask.any(dim=1)
             if has_valid.any():
                 row_idx = torch.nonzero(has_valid, as_tuple=False).squeeze(1)
-                attn[row_idx, leader_idx[row_idx]] = 1.0
+                attn[row_idx, oracle_idx[row_idx]] = 1.0
 
         else:
             q = self.to_q(ego_e)       # (B, D)
