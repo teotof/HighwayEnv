@@ -16,6 +16,9 @@ SCENARIO_NAME = os.getenv("SCENARIO_NAME", "cf_v2")
 scenario = SCENARIOS[SCENARIO_NAME]
 ATTN_MODE = os.getenv("ATTN_MODE", "learned")
 X_INDEX = int(os.getenv("X_INDEX", "1"))
+VX_INDEX = int(os.getenv("VX_INDEX", "3"))
+ORACLE_RULE = os.getenv("ORACLE_RULE", "leader_x")
+TTC_EPS = float(os.getenv("TTC_EPS", "1e-6"))
 
 ENV_ID = scenario["env_id"]
 ENV_CONFIG = scenario["config"]
@@ -67,6 +70,9 @@ if __name__ == "__main__":
                 d_model=32,
                 mode=ATTN_MODE,
                 x_index=X_INDEX,
+                vx_index=VX_INDEX,
+                oracle_rule=ORACLE_RULE,
+                ttc_eps=TTC_EPS,
             ),
         )
 

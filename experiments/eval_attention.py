@@ -63,7 +63,7 @@ def main():
             "This usually means the wrong checkpoint was loaded for the scenario."
         )
 
-    attn_log, dx_log, presence_log = [], [], []
+    attn_log, dx_log, vx_log, presence_log = [], [], [], []
 
     for t in range(STEPS):
         obs_in = obs
@@ -79,6 +79,7 @@ def main():
             attn_log.append(attn.squeeze(0).cpu().numpy())
 
         dx_log.append(obs_in[1:, 1].copy())
+        vx_log.append(obs_in[1:, 3].copy())
         presence_log.append(obs_in[1:, 0].copy())
 
         obs, reward, terminated, truncated, info = env.step(action)
@@ -89,6 +90,7 @@ def main():
 
     attn_log = np.array(attn_log)
     dx_log = np.array(dx_log)
+    vx_log = np.array(vx_log)
     presence_log = np.array(presence_log)
 
     if ATTN_MODE:
@@ -98,8 +100,9 @@ def main():
     os.makedirs(out_dir, exist_ok=True)
     np.save(f"{out_dir}/attention.npy", attn_log)
     np.save(f"{out_dir}/dx.npy", dx_log)
+    np.save(f"{out_dir}/vx.npy", vx_log)
     np.save(f"{out_dir}/presence.npy", presence_log)
-    print("Saved:", attn_log.shape, dx_log.shape, presence_log.shape)
+    print("Saved:", attn_log.shape, dx_log.shape, vx_log.shape, presence_log.shape)
 
 if __name__ == "__main__":
     main()
