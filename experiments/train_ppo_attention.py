@@ -36,7 +36,21 @@ WRAPPER_CLASS = WRAPPER_MAP.get(WRAPPER_NAME)
 
 EXP_VERSION = os.getenv("EXP_VERSION", "v2")
 
-SEEDS = [0, 1, 2]
+
+def parse_seeds(raw: str):
+    """Parse comma-separated seeds from env var, e.g. '0,1,2' or '0'."""
+    if not raw:
+        return [0, 1, 2]
+    seeds = []
+    for part in raw.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        seeds.append(int(part))
+    return seeds if seeds else [0, 1, 2]
+
+
+SEEDS = parse_seeds(os.getenv("SEEDS", "0,1,2"))
 TOTAL_TIMESTEPS = int(os.getenv("TOTAL_TIMESTEPS", "500000"))
 N_ENVS = int(os.getenv("N_ENVS", "4"))
 
