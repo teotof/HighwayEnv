@@ -22,7 +22,7 @@ MODEL_PATH = os.getenv(
     "MODEL_PATH",
     default_model_path
 )
-STEPS = int(os.getenv("STEPS", "1000"))
+STEPS = int(os.getenv("STEPS", "0"))
 
 scenario = SCENARIOS[SCENARIO_NAME]
 ENV_ID = scenario["env_id"]
@@ -55,6 +55,12 @@ def main():
     print("Env obs shape:", env_obs_shape)
     print("Model obs shape:", model_obs_shape)
 
+    max_steps = STEPS
+    if max_steps <= 0:
+        cfg = env.unwrapped.config
+        max_steps = max(1, int(round(float(cfg.get("duration", 40)) * float(cfg.get("policy_frequency", 1)))))
+    print("Attention log steps:", max_steps)
+
     if env_obs_shape != model_obs_shape:
         raise ValueError(
             "Observation mismatch: "
@@ -65,7 +71,7 @@ def main():
 
     attn_log, dx_log, vx_log, presence_log = [], [], [], []
 
-    for t in range(STEPS):
+    for t in range(max_steps):
         obs_in = obs
 
         action, _ = model.predict(obs_in, deterministic=True)

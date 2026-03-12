@@ -44,6 +44,13 @@ MAX_STEPS = int(os.getenv("MAX_STEPS", "0"))  # 0 means "auto from env config"
 SEEDS = [0, 1, 2]
 
 
+def auto_max_steps(env) -> int:
+    cfg = env.unwrapped.config
+    duration_s = float(cfg.get("duration", 40))
+    policy_hz = float(cfg.get("policy_frequency", 1))
+    return max(1, int(round(duration_s * policy_hz)))
+
+
 def eval_one(model_path: str, seed: int):
     env = gym.make(ENV_ID, config=ENV_CONFIG)
     if WRAPPER_CLASS is not None:
@@ -53,8 +60,7 @@ def eval_one(model_path: str, seed: int):
     if MAX_STEPS > 0:
         max_steps = MAX_STEPS
     else:
-        # highway-env config often has "duration" (in steps)
-        max_steps = int(env.unwrapped.config.get("duration", 200))
+        max_steps = auto_max_steps(env)
 
     model = PPO.load(model_path, device="cpu")
 
