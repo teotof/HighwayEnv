@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J base
+#SBATCH -J deepsets
 #SBATCH -p compute
 #SBATCH -n 1
 #SBATCH -c 16
@@ -17,18 +17,17 @@ cd /home/users/hadjitot/fyp/HighwayEnv
 export PYTHONPATH=$PWD
 export OMP_NUM_THREADS=1
 
-: "${TRAIN_SCENARIO_NAME:=cf_v2}"
-: "${EVAL_SCENARIO_NAME:=$TRAIN_SCENARIO_NAME}"
-: "${EXP_VERSION:=v2}"
-: "${MODEL_KIND:=attn}"
-: "${ATTN_MODE:=}"
-export TRAIN_SCENARIO_NAME EVAL_SCENARIO_NAME EXP_VERSION MODEL_KIND ATTN_MODE
+: "${SCENARIO_NAME:=cf_v2}"
+: "${EXP_VERSION:=v9}"
+: "${TOTAL_TIMESTEPS:=500000}"
+: "${N_ENVS:=4}"
+: "${DEEPSETS_HIDDEN:=64}"
+export SCENARIO_NAME EXP_VERSION TOTAL_TIMESTEPS N_ENVS DEEPSETS_HIDDEN
 
-echo "TRAIN_SCENARIO_NAME=$TRAIN_SCENARIO_NAME"
-echo "EVAL_SCENARIO_NAME=$EVAL_SCENARIO_NAME"
+echo "SCENARIO_NAME=$SCENARIO_NAME"
 echo "EXP_VERSION=$EXP_VERSION"
-echo "MODEL_KIND=$MODEL_KIND"
-echo "ATTN_MODE=${ATTN_MODE:-legacy-name}"
+echo "TOTAL_TIMESTEPS=$TOTAL_TIMESTEPS"
+echo "N_ENVS=$N_ENVS"
+echo "DEEPSETS_HIDDEN=$DEEPSETS_HIDDEN"
 
-python experiments/eval_metrics.py
-
+python experiments/train_ppo_deepsets.py
