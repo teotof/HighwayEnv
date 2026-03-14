@@ -1,0 +1,117 @@
+Loading Anaconda 3 2024.02-1
+SCENARIO_NAME=highway_lanechange_dense_obs20_shuffle
+SEED=0
+EXP_VERSION=v8
+ATTN_MODE=learned
+MODEL_PATH=runs/models/ppo_attn_learned_highway_lanechange_dense_obs20_v8_seed0.zip
+STEPS=0
+OUT_DIR=runs/attn_logs/learned/highway_lanechange_dense_obs20_shuffle/seed0
+SCENARIO_NAME=highway_lanechange_dense_obs20_shuffle SEED=0 ATTN_MODE=learned
+Resolved MODEL_PATH=/home/users/hadjitot/fyp/HighwayEnv/runs/models/ppo_attn_learned_highway_lanechange_dense_obs20_v8_seed0.zip
+Env obs shape: (20, 5)
+Model obs shape: (20, 5)
+Attention log steps: 175
+Saved: (175, 19) (175, 19) (175, 19) (175, 19)
+T: 175 N: 19
+argmax==leader hit rate: 0.19428571428571428
+mean attention on leader: 0.07301766
+mean attention entropy: 2.3321214
+argmax==ttc_critical hit rate: 0.0
+mean attention on ttc_critical: 0.033231877
+fraction steps with closing TTC candidate: 1.0
+mean min TTC (closing steps only): 1.2154486179351807
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 166695 (attnlog_highway_lanechange_dense_obs20_to_highway_lanechange_dense_obs20_shuffle_seed0_v8) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Sat Mar 14 06:17:14 GMT 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 166695
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:00:00
+CPU Efficiency: 0.00% of 00:08:00 core-walltime
+Job Wall-clock time: 00:00:30
+Memory Utilized: 0.00 MB
+Memory Efficiency: 0.00% of 32.00 GB (32.00 GB/node)
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+166695       attnlog_h+        16             1                                                      00:00:30  COMPLETED      0:0 
+166695.batch      batch        16      1      1    425264K    callan-n04            0        0.00M   00:00:30  COMPLETED      0:0 
+166695.exte+     extern        16      1      1                                                      00:00:30  COMPLETED      0:0 
+
+
+Job details:
+============
+
+JobId=166695 JobName=attnlog_highway_lanechange_dense_obs20_to_highway_lanechange_dense_obs20_shuffle_seed0_v8
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=102569 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=00:00:30 TimeLimit=2-00:00:00 TimeMin=N/A
+   SubmitTime=2026-03-14T02:10:39 EligibleTime=2026-03-14T05:14:39
+   AccrueTime=2026-03-14T05:14:39
+   StartTime=2026-03-14T06:16:44 EndTime=2026-03-14T06:17:14 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-03-14T06:16:44 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=callan01:408560
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n04
+   BatchHost=callan-n04
+   NumNodes=1 NumCPUs=16 NumTasks=1 CPUs/Task=16 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=16,mem=32G,node=1,billing=16
+   AllocTRES=cpu=16,mem=32G,node=1,billing=16
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n04 CPU_IDs=12-19,36-43 Mem=32768 GRES=
+   MinCPUsNode=16 MinMemoryNode=32G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/eval_attention.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/attnlog_highway_lanechange_dense_obs20_to_highway_lanechange_dense_obs20_shuffle_seed0_v8_166695.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/attnlog_highway_lanechange_dense_obs20_to_highway_lanechange_dense_obs20_shuffle_seed0_v8_166695.out
+   TresPerTask=cpu=16
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4840432          0          0        440     none |   391005       0        0      218     none
+root       FILESET     4890083          0          0       3724     none |  9908468       0        0      923     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot      17,449 | CALLAN_HADJITOT    17,449 |       300,000   282,551
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################
