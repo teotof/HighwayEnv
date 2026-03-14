@@ -4,6 +4,9 @@ import gymnasium as gym
 import highway_env  # registers envs
 from stable_baselines3 import PPO
 
+from attention_extractor import KinematicAttentionExtractor  # noqa: F401
+from deepset_extractor import DeepSetExtractor  # noqa: F401
+
 from experiments.scenarios import SCENARIOS
 from experiments.wrappers import ShuffleNeighboursObs, StopGoLeaderWrapper
 
@@ -14,15 +17,25 @@ EVAL_SCENARIO_NAME  = os.getenv("EVAL_SCENARIO_NAME", TRAIN_SCENARIO_NAME)
 EXP_VERSION = os.getenv("EXP_VERSION", "v2")  # must match training run names
 TRAIN_EXP_ID = f"{TRAIN_SCENARIO_NAME}_{EXP_VERSION}"
 ATTN_MODE = os.getenv("ATTN_MODE", "").strip()
+MODEL_KIND = os.getenv("MODEL_KIND", "").strip().lower()
+
+if not MODEL_KIND:
+    MODEL_KIND = "attn"
 
 BASELINE_PREFIX = f"runs/models/ppo_baseline_{TRAIN_EXP_ID}_seed"
-if ATTN_MODE:
-    ATTN_PREFIX = f"runs/models/ppo_attn_{ATTN_MODE}_{TRAIN_EXP_ID}_seed"
-    ATTN_LABEL = f"ATTENTION ({ATTN_MODE})"
+if MODEL_KIND == "attn":
+    if ATTN_MODE:
+        VARIANT_PREFIX = f"runs/models/ppo_attn_{ATTN_MODE}_{TRAIN_EXP_ID}_seed"
+        VARIANT_LABEL = f"ATTENTION ({ATTN_MODE})"
+    else:
+        # Backward-compatible path for older runs without mode in name.
+        VARIANT_PREFIX = f"runs/models/ppo_attn_{TRAIN_EXP_ID}_seed"
+        VARIANT_LABEL = "ATTENTION"
+elif MODEL_KIND == "deepsets":
+    VARIANT_PREFIX = f"runs/models/ppo_deepsets_{TRAIN_EXP_ID}_seed"
+    VARIANT_LABEL = "DEEPSETS"
 else:
-    # Backward-compatible path for older runs without mode in name.
-    ATTN_PREFIX = f"runs/models/ppo_attn_{TRAIN_EXP_ID}_seed"
-    ATTN_LABEL = "ATTENTION"
+    raise ValueError(f"Unknown MODEL_KIND '{MODEL_KIND}'. Use attn|deepsets.")
 
 # Build evaluation env from EVAL_SCENARIO_NAME
 scenario_eval = SCENARIOS[EVAL_SCENARIO_NAME]
@@ -115,17 +128,19 @@ def summarize(label: str, results: list[dict]):
 if __name__ == "__main__":
     print(f"Loading models trained on: {TRAIN_SCENARIO_NAME} (EXP_VERSION={EXP_VERSION})")
     print(f"Evaluating in env: {EVAL_SCENARIO_NAME} -> {ENV_ID}")
-    print(f"Attention mode: {ATTN_MODE if ATTN_MODE else 'legacy-name'}")
+    print(f"Model kind: {MODEL_KIND}")
+    if MODEL_KIND == "attn":
+        print(f"Attention mode: {ATTN_MODE if ATTN_MODE else 'legacy-name'}")
 
     baseline_results = []
-    attn_results = []
+    variant_results = []
 
     for seed in SEEDS:
         baseline_path = f"{BASELINE_PREFIX}{seed}.zip"
-        attn_path = f"{ATTN_PREFIX}{seed}.zip"
+        variant_path = f"{VARIANT_PREFIX}{seed}.zip"
 
         baseline_results.append(eval_one(baseline_path, seed))
-        attn_results.append(eval_one(attn_path, seed))
+        variant_results.append(eval_one(variant_path, seed))
 
     summarize("BASELINE", baseline_results)
-    summarize(ATTN_LABEL, attn_results)
+    summarize(VARIANT_LABEL, variant_results)

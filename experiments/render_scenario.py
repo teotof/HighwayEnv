@@ -15,6 +15,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from attention_extractor import KinematicAttentionExtractor  # noqa: F401
+from deepset_extractor import DeepSetExtractor  # noqa: F401
 from experiments.scenarios import SCENARIOS
 from experiments.wrappers import ShuffleNeighboursObs, StopGoLeaderWrapper
 
@@ -38,7 +39,7 @@ def parse_args():
     parser.add_argument(
         "--model-type",
         default="baseline",
-        choices=["baseline", "attn"],
+        choices=["baseline", "attn", "deepsets"],
         help="Checkpoint family to load.",
     )
     parser.add_argument(
@@ -122,6 +123,10 @@ def resolve_model_path(args) -> Path:
         candidates = [
             models_dir / f"ppo_baseline_{args.scenario}_{args.exp_version}_seed{args.seed}.zip"
         ]
+    elif args.model_type == "deepsets":
+        candidates = [
+            models_dir / f"ppo_deepsets_{args.scenario}_{args.exp_version}_seed{args.seed}.zip"
+        ]
     else:
         candidates = [
             models_dir
@@ -159,6 +164,8 @@ def make_video_prefix(args) -> str:
         return args.name_prefix
     if args.model_type == "baseline":
         return f"{args.scenario}_{args.exp_version}_seed{args.seed}"
+    if args.model_type == "deepsets":
+        return f"deepsets_{args.scenario}_{args.exp_version}_seed{args.seed}"
     return f"{args.attn_mode}_{args.scenario}_{args.exp_version}_seed{args.seed}"
 
 
