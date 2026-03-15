@@ -16,6 +16,7 @@ if str(ROOT) not in sys.path:
 
 from attention_extractor import KinematicAttentionExtractor  # noqa: F401
 from deepset_extractor import DeepSetExtractor  # noqa: F401
+from experiments.marl_utils import make_shared_world_env, predict_shared_actions, shared_run_name
 from experiments.scenarios import SCENARIOS
 from experiments.wrappers import ShuffleNeighboursObs, StopGoLeaderWrapper
 
@@ -39,7 +40,7 @@ def parse_args():
     parser.add_argument(
         "--model-type",
         default="baseline",
-        choices=["baseline", "attn", "deepsets"],
+        choices=["baseline", "attn", "deepsets", "shared"],
         help="Checkpoint family to load.",
     )
     parser.add_argument(
@@ -57,6 +58,12 @@ def parse_args():
         type=int,
         default=0,
         help="Checkpoint seed suffix and env reset seed.",
+    )
+    parser.add_argument(
+        "--controlled-vehicles",
+        type=int,
+        default=2,
+        help="Number of controlled vehicles for shared-policy MARL checkpoints.",
     )
     parser.add_argument(
         "--episodes",
@@ -127,6 +134,11 @@ def resolve_model_path(args) -> Path:
         candidates = [
             models_dir / f"ppo_deepsets_{args.scenario}_{args.exp_version}_seed{args.seed}.zip"
         ]
+    elif args.model_type == "shared":
+        candidates = [
+            models_dir
+            / f"{shared_run_name(args.scenario, args.exp_version, args.controlled_vehicles, args.seed)}.zip"
+        ]
     else:
         candidates = [
             models_dir
@@ -143,6 +155,13 @@ def resolve_model_path(args) -> Path:
 
 
 def make_env(args, render_mode: str):
+    if args.model_type == "shared":
+        return make_shared_world_env(
+            scenario_name=args.scenario,
+            controlled_vehicles=args.controlled_vehicles,
+            render_mode=render_mode,
+        )
+
     scenario = SCENARIOS[args.scenario]
     env = gym.make(
         scenario["env_id"],
@@ -166,6 +185,11 @@ def make_video_prefix(args) -> str:
         return f"{args.scenario}_{args.exp_version}_seed{args.seed}"
     if args.model_type == "deepsets":
         return f"deepsets_{args.scenario}_{args.exp_version}_seed{args.seed}"
+    if args.model_type == "shared":
+        return (
+            f"shared_{args.scenario}_{args.exp_version}_"
+            f"cv{args.controlled_vehicles}_seed{args.seed}"
+        )
     return f"{args.attn_mode}_{args.scenario}_{args.exp_version}_seed{args.seed}"
 
 
@@ -233,6 +257,8 @@ def main():
     print(f"Scenario: {args.scenario}")
     print(f"Render mode: {render_mode}")
     print(f"Max steps per episode: {max_steps}")
+    if args.model_type == "shared":
+        print(f"Controlled vehicles: {args.controlled_vehicles}")
 
     try:
         for episode in range(args.episodes):
@@ -244,6 +270,8 @@ def main():
             while not (terminated or truncated) and step < max_steps:
                 if model is None:
                     action = env.action_space.sample()
+                elif args.model_type == "shared":
+                    action = predict_shared_actions(model, obs, deterministic=True)
                 else:
                     action, _ = model.predict(obs, deterministic=True)
 

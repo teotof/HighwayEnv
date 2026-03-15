@@ -1,6 +1,7 @@
 import numpy as np
 import gymnasium as gym
 
+
 class ShuffleNeighboursObs(gym.ObservationWrapper):
     """
     Keeps row 0 (ego) fixed, randomly permutes rows 1..N (neighbour slots).
@@ -26,7 +27,7 @@ class ShuffleNeighboursObs(gym.ObservationWrapper):
         perm = self.rng.permutation(n)
         return perm
 
-    def observation(self, obs):
+    def _shuffle_matrix(self, obs):
         if obs.ndim != 2:
             return obs  # fail-safe
         ego = obs[:1, :]
@@ -36,6 +37,11 @@ class ShuffleNeighboursObs(gym.ObservationWrapper):
         perm = self._perm if (self._perm is not None) else self._make_perm(obs)
         nei_shuf = nei[perm, :]
         return np.concatenate([ego, nei_shuf], axis=0)
+
+    def observation(self, obs):
+        if isinstance(obs, tuple):
+            return tuple(self._shuffle_matrix(agent_obs) for agent_obs in obs)
+        return self._shuffle_matrix(obs)
 
 
 class StopGoLeaderWrapper(gym.Wrapper):
@@ -50,60 +56,71 @@ class StopGoLeaderWrapper(gym.Wrapper):
         self.v_high = v_high
         self.t = 0
         self.rng = np.random.default_rng(0)
-        self.leader = None
+        self.leaders = []
 
     def reset(self, *, seed=None, options=None):
         if seed is not None:
             self.rng = np.random.default_rng(seed)
         self.t = 0
         obs, info = self.env.reset(seed=seed, options=options)
-        self.leader = self._find_leader()
+        self.leaders = self._find_leaders()
         return obs, info
 
     def step(self, action):
         obs, reward, terminated, truncated, info = self.env.step(action)
         self.t += 1
 
-        # refresh leader occasionally (traffic changes)
+        # refresh leaders occasionally (traffic changes)
         if self.t % (self.period * 4) == 0:
-            self.leader = self._find_leader()
+            self.leaders = self._find_leaders()
 
         # every `period` steps, flip leader target speed
-        if self.leader is not None and (self.t % self.period == 0):
-            new_v = float(self.rng.uniform(self.v_low, self.v_high))
-            # Try common vehicle attribute used in highway-env behaviour models
-            if hasattr(self.leader, "target_speed"):
-                self.leader.target_speed = new_v
-            elif hasattr(self.leader, "speed"):
-                # fallback (less realistic, but keeps the idea)
-                if hasattr(self.leader, "target_speed"):
-                    self.leader.target_speed = new_v
-                self.leader.speed = new_v
+        if self.t % self.period == 0:
+            updated_ids = set()
+            for leader in self.leaders:
+                if leader is None:
+                    continue
+                leader_id = id(leader)
+                if leader_id in updated_ids:
+                    continue
+                updated_ids.add(leader_id)
+                new_v = float(self.rng.uniform(self.v_low, self.v_high))
+                # Try common vehicle attribute used in highway-env behaviour models
+                if hasattr(leader, "target_speed"):
+                    leader.target_speed = new_v
+                elif hasattr(leader, "speed"):
+                    leader.speed = new_v
 
         return obs, reward, terminated, truncated, info
 
-    def _find_leader(self):
+    def _find_leaders(self):
         env = self.env.unwrapped
         if not hasattr(env, "road") or not hasattr(env.road, "vehicles"):
-            return None
+            return []
         vehicles = env.road.vehicles
         if not vehicles:
-            return None
+            return []
 
-        ego = getattr(env, "vehicle", None)
-        if ego is None or not hasattr(ego, "position"):
-            return None
+        egos = getattr(env, "controlled_vehicles", None) or [getattr(env, "vehicle", None)]
+        leaders = []
 
-        ego_x = float(ego.position[0])
-        best = None
-        best_dx = None
-
-        for v in vehicles:
-            if v is ego or not hasattr(v, "position"):
+        for ego in egos:
+            if ego is None or not hasattr(ego, "position"):
+                leaders.append(None)
                 continue
-            dx = float(v.position[0]) - ego_x
-            if dx > 0.0 and (best_dx is None or dx < best_dx):
-                best_dx = dx
-                best = v
 
-        return best
+            ego_x = float(ego.position[0])
+            best = None
+            best_dx = None
+
+            for vehicle in vehicles:
+                if vehicle is ego or not hasattr(vehicle, "position"):
+                    continue
+                dx = float(vehicle.position[0]) - ego_x
+                if dx > 0.0 and (best_dx is None or dx < best_dx):
+                    best_dx = dx
+                    best = vehicle
+
+            leaders.append(best)
+
+        return leaders
