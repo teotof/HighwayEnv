@@ -16,7 +16,12 @@ if str(ROOT) not in sys.path:
 
 from attention_extractor import KinematicAttentionExtractor  # noqa: F401
 from deepset_extractor import DeepSetExtractor  # noqa: F401
-from experiments.marl_utils import make_shared_world_env, predict_shared_actions, shared_run_name
+from experiments.marl_utils import (
+    make_shared_world_env,
+    predict_shared_actions,
+    shared_attention_run_name,
+    shared_run_name,
+)
 from experiments.scenarios import SCENARIOS
 from experiments.wrappers import ShuffleNeighboursObs, StopGoLeaderWrapper
 
@@ -40,7 +45,7 @@ def parse_args():
     parser.add_argument(
         "--model-type",
         default="baseline",
-        choices=["baseline", "attn", "deepsets", "shared"],
+        choices=["baseline", "attn", "deepsets", "shared", "shared_attn"],
         help="Checkpoint family to load.",
     )
     parser.add_argument(
@@ -139,6 +144,13 @@ def resolve_model_path(args) -> Path:
             models_dir
             / f"{shared_run_name(args.scenario, args.exp_version, args.controlled_vehicles, args.seed)}.zip"
         ]
+    elif args.model_type == "shared_attn":
+        candidates = [
+            models_dir
+            / (
+                f"{shared_attention_run_name(args.scenario, args.exp_version, args.controlled_vehicles, args.attn_mode, args.seed)}.zip"
+            )
+        ]
     else:
         candidates = [
             models_dir
@@ -155,7 +167,7 @@ def resolve_model_path(args) -> Path:
 
 
 def make_env(args, render_mode: str):
-    if args.model_type == "shared":
+    if args.model_type in {"shared", "shared_attn"}:
         return make_shared_world_env(
             scenario_name=args.scenario,
             controlled_vehicles=args.controlled_vehicles,
@@ -188,6 +200,11 @@ def make_video_prefix(args) -> str:
     if args.model_type == "shared":
         return (
             f"shared_{args.scenario}_{args.exp_version}_"
+            f"cv{args.controlled_vehicles}_seed{args.seed}"
+        )
+    if args.model_type == "shared_attn":
+        return (
+            f"shared_attn_{args.attn_mode}_{args.scenario}_{args.exp_version}_"
             f"cv{args.controlled_vehicles}_seed{args.seed}"
         )
     return f"{args.attn_mode}_{args.scenario}_{args.exp_version}_seed{args.seed}"
@@ -257,7 +274,7 @@ def main():
     print(f"Scenario: {args.scenario}")
     print(f"Render mode: {render_mode}")
     print(f"Max steps per episode: {max_steps}")
-    if args.model_type == "shared":
+    if args.model_type in {"shared", "shared_attn"}:
         print(f"Controlled vehicles: {args.controlled_vehicles}")
 
     try:
@@ -270,7 +287,7 @@ def main():
             while not (terminated or truncated) and step < max_steps:
                 if model is None:
                     action = env.action_space.sample()
-                elif args.model_type == "shared":
+                elif args.model_type in {"shared", "shared_attn"}:
                     action = predict_shared_actions(model, obs, deterministic=True)
                 else:
                     action, _ = model.predict(obs, deterministic=True)

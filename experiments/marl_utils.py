@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 from functools import partial
+from pathlib import Path
 
 import gymnasium as gym
 import highway_env  # noqa: F401
 import numpy as np
 from stable_baselines3.common.monitor import Monitor
 
+from attention_extractor import KinematicAttentionExtractor
 from experiments.scenarios import get_scenario
 from experiments.wrappers import ShuffleNeighboursObs, StopGoLeaderWrapper
 
@@ -27,6 +29,77 @@ def shared_run_name(
     return (
         f"ppo_shared_{scenario_name}_{exp_version}_"
         f"cv{controlled_vehicles}_seed{seed}"
+    )
+
+
+def shared_attention_run_name(
+    scenario_name: str,
+    exp_version: str,
+    controlled_vehicles: int,
+    attn_mode: str,
+    seed: int,
+) -> str:
+    return (
+        f"ppo_shared_attn_{attn_mode}_{scenario_name}_{exp_version}_"
+        f"cv{controlled_vehicles}_seed{seed}"
+    )
+
+
+def resolve_shared_model_path(
+    model_dir: str | Path,
+    scenario_name: str,
+    exp_version: str,
+    controlled_vehicles: int,
+    seed: int,
+    *,
+    model_kind: str = "baseline",
+    attn_mode: str = "learned",
+) -> Path:
+    model_dir = Path(model_dir)
+    model_kind = model_kind.strip().lower()
+
+    if model_kind == "baseline":
+        run_name = shared_run_name(
+            scenario_name,
+            exp_version,
+            controlled_vehicles,
+            seed,
+        )
+    elif model_kind == "attn":
+        run_name = shared_attention_run_name(
+            scenario_name,
+            exp_version,
+            controlled_vehicles,
+            attn_mode,
+            seed,
+        )
+    else:
+        raise ValueError(f"Unknown shared model_kind '{model_kind}'. Use baseline|attn.")
+
+    return model_dir / f"{run_name}.zip"
+
+
+def make_attention_policy_kwargs(
+    *,
+    attn_mode: str,
+    x_index: int,
+    vx_index: int,
+    oracle_rule: str,
+    ttc_eps: float,
+    features_dim: int = 128,
+    d_model: int = 32,
+) -> dict:
+    return dict(
+        features_extractor_class=KinematicAttentionExtractor,
+        features_extractor_kwargs=dict(
+            features_dim=features_dim,
+            d_model=d_model,
+            mode=attn_mode,
+            x_index=x_index,
+            vx_index=vx_index,
+            oracle_rule=oracle_rule,
+            ttc_eps=ttc_eps,
+        ),
     )
 
 
