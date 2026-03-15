@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from copy import deepcopy
 import math
 
 from experiments import custom_envs  # noqa: F401  # register custom env ids
@@ -241,3 +242,56 @@ SCENARIOS = {
         "wrapper_kwargs": {"shuffle_each_step": True},
     },
 }
+
+
+def make_multi_agent_config(base_config: dict, controlled_vehicles: int) -> dict:
+    """
+    Wrap a single-agent config so highway-env exposes one observation/action per
+    controlled vehicle.
+
+    The underlying env dynamics stay unchanged; only the config structure is
+    converted to highway-env's built-in MultiAgentObservation/MultiAgentAction.
+    """
+    if controlled_vehicles < 1:
+        raise ValueError("controlled_vehicles must be >= 1.")
+
+    config = deepcopy(base_config)
+    if controlled_vehicles == 1:
+        return config
+
+    action_config = deepcopy(config["action"])
+    observation_config = deepcopy(config["observation"])
+
+    config["controlled_vehicles"] = controlled_vehicles
+    config["action"] = {
+        "type": "MultiAgentAction",
+        "action_config": action_config,
+    }
+    config["observation"] = {
+        "type": "MultiAgentObservation",
+        "observation_config": observation_config,
+    }
+    return config
+
+
+def get_scenario(
+    scenario_name: str,
+    *,
+    controlled_vehicles: int = 1,
+    multi_agent: bool = False,
+) -> dict:
+    """
+    Return an isolated scenario dict that can be safely mutated by callers.
+    """
+    if scenario_name not in SCENARIOS:
+        raise KeyError(
+            f"Unknown scenario '{scenario_name}'. Available: {sorted(SCENARIOS)}"
+        )
+
+    scenario = deepcopy(SCENARIOS[scenario_name])
+    if multi_agent:
+        scenario["config"] = make_multi_agent_config(
+            scenario["config"],
+            controlled_vehicles=controlled_vehicles,
+        )
+    return scenario
