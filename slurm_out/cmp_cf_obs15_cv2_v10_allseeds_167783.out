@@ -1,0 +1,149 @@
+Loading Anaconda 3 2024.02-1
+TRAIN_SCENARIO_NAME=cf_obs15
+EVAL_SCENARIO_NAME=cf_obs15
+EXP_VERSION=v10
+SEEDS=0
+CONTROLLED_VEHICLES=2
+N_EVAL_EPISODES=50
+MAX_STEPS=0
+MODEL_DIR=runs/models
+ATTN_MODE=learned
+Train scenario: cf_obs15
+Eval scenario: cf_obs15
+EXP_VERSION=v10
+CONTROLLED_VEHICLES=2
+ATTN_MODE=learned
+N_EVAL_EPISODES=50
+[ppo_shared_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=0/50
+[ppo_shared_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=5/50
+[ppo_shared_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=10/50
+[ppo_shared_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=15/50
+[ppo_shared_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=20/50
+[ppo_shared_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=25/50
+[ppo_shared_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=30/50
+[ppo_shared_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=35/50
+[ppo_shared_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=40/50
+[ppo_shared_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=45/50
+[ppo_shared_attn_learned_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=0/50
+[ppo_shared_attn_learned_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=5/50
+[ppo_shared_attn_learned_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=10/50
+[ppo_shared_attn_learned_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=15/50
+[ppo_shared_attn_learned_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=20/50
+[ppo_shared_attn_learned_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=25/50
+[ppo_shared_attn_learned_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=30/50
+[ppo_shared_attn_learned_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=35/50
+[ppo_shared_attn_learned_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=40/50
+[ppo_shared_attn_learned_cf_obs15_v10_cv2_seed0.zip] seed=0 ep=45/50
+
+SHARED BASELINE
+  world_reward_return: 36.148 +/- 0.000
+  joint_return: 72.297 +/- 0.000
+  agent_return: 36.148 +/- 0.000
+  world_crash_rate: 0.000 +/- 0.000
+  agent_crash_rate: 0.000 +/- 0.000
+  world_success_rate: 0.000 +/- 0.000
+  mean_len: 150.000 +/- 0.000
+
+SHARED ATTENTION (learned)
+  world_reward_return: 33.549 +/- 0.000
+  joint_return: 67.097 +/- 0.000
+  agent_return: 33.549 +/- 0.000
+  world_crash_rate: 0.000 +/- 0.000
+  agent_crash_rate: 0.000 +/- 0.000
+  world_success_rate: 0.000 +/- 0.000
+  mean_len: 150.000 +/- 0.000
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 167783 (cmp_cf_obs15_cv2_v10_allseeds) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Mon Mar 16 19:10:55 GMT 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 167783
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:05:48
+CPU Efficiency: 11.79% of 00:49:12 core-walltime
+Job Wall-clock time: 00:06:09
+Memory Utilized: 656.15 MB
+Memory Efficiency: 4.00% of 16.00 GB (16.00 GB/node)
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+167783       cmp_cf_ob+         8             1                                                      00:06:09  COMPLETED      0:0 
+167783.batch      batch         8      1      1    671900K    callan-n11       61.65M        0.01M   00:06:09  COMPLETED      0:0 
+167783.exte+     extern         8      1      1                                                      00:06:09  COMPLETED      0:0 
+
+
+Job details:
+============
+
+JobId=167783 JobName=cmp_cf_obs15_cv2_v10_allseeds
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=102131 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=00:06:09 TimeLimit=1-00:00:00 TimeMin=N/A
+   SubmitTime=2026-03-16T15:47:00 EligibleTime=2026-03-16T19:04:46
+   AccrueTime=2026-03-16T19:04:46
+   StartTime=2026-03-16T19:04:46 EndTime=2026-03-16T19:10:55 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-03-16T19:04:46 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=callan01:2762403
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n11
+   BatchHost=callan-n11
+   NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=8,mem=16G,node=1,billing=8
+   AllocTRES=cpu=8,mem=16G,node=1,billing=8
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n11 CPU_IDs=3-10 Mem=16384 GRES=
+   MinCPUsNode=8 MinMemoryNode=16G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/eval_shared_metrics.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/cmp_cf_obs15_cv2_v10_allseeds_167783.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/cmp_cf_obs15_cv2_v10_allseeds_167783.out
+   TresPerTask=cpu=8
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4846088          0          0        830     none |   392331       0        0      441     none
+root       FILESET     4889492          0          0       3210     none |  9911053       0        0      899     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot      16,020 | CALLAN_HADJITOT    16,020 |       300,000   283,980
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################
