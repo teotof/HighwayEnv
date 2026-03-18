@@ -1,0 +1,29 @@
+steps=5000 agents=2 neighbours=19
+log_dir=runs/attn_logs_shared/learned/cf_obs20_dense/cv2/seed1
+AGGREGATE
+  T: 10000 N: 19
+  argmax==leader hit rate: 0.9858
+  mean attention on leader: 0.42488348
+  mean attention entropy: 1.4887493
+  argmax==ttc_critical hit rate: 0.9803
+  mean attention on ttc_critical: 0.4259998
+  fraction steps with closing TTC candidate: 0.9199
+  mean min TTC (closing steps only): 60.4651985168457
+AGENT 0
+  T: 5000 N: 19
+  argmax==leader hit rate: 1.0
+  mean attention on leader: 0.4268601
+  mean attention entropy: 1.4935235
+  argmax==ttc_critical hit rate: 0.9934
+  mean attention on ttc_critical: 0.42536992
+  fraction steps with closing TTC candidate: 0.9136
+  mean min TTC (closing steps only): 1.7062435150146484
+AGENT 1
+  T: 5000 N: 19
+  argmax==leader hit rate: 0.9716
+  mean attention on leader: 0.42290694
+  mean attention entropy: 1.483975
+  argmax==ttc_critical hit rate: 0.9672
+  mean attention on ttc_critical: 0.4266297
+  fraction steps with closing TTC candidate: 0.9262
+  mean min TTC (closing steps only): 118.42478942871094
