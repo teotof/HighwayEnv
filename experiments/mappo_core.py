@@ -10,6 +10,8 @@ import torch.nn.functional as F
 from torch import nn
 from torch.distributions import Normal
 
+from experiments.attention_extractor import KinematicAttentionEncoder
+
 
 def _mlp(input_dim: int, hidden_dim: int, output_dim: int) -> nn.Sequential:
     return nn.Sequential(
@@ -34,6 +36,8 @@ class MAPPOConfig:
     state_dim: int
     action_dim: int
     num_agents: int
+    obs_shape: tuple[int, ...] | None = None
+    policy_kind: str = "baseline"
     hidden_dim: int = 128
     learning_rate: float = 3e-4
     gamma: float = 0.99
@@ -46,6 +50,13 @@ class MAPPOConfig:
     num_minibatches: int = 4
     clip_vloss: bool = True
     target_kl: float | None = None
+    features_dim: int = 128
+    d_model: int = 32
+    attn_mode: str = "learned"
+    x_index: int = 1
+    vx_index: int = 3
+    oracle_rule: str = "leader_x"
+    ttc_eps: float = 1e-6
 
 
 class GaussianActor(nn.Module):
@@ -73,6 +84,8 @@ class CentralizedCritic(nn.Module):
 
 
 class MAPPOPolicy(nn.Module):
+    expects_matrix_obs = False
+
     def __init__(
         self,
         config: MAPPOConfig,
@@ -131,6 +144,91 @@ class MAPPOPolicy(nn.Module):
         return log_probs, entropies, values
 
 
+class MAPPOAttentionPolicy(nn.Module):
+    expects_matrix_obs = True
+
+    def __init__(
+        self,
+        config: MAPPOConfig,
+        *,
+        action_low: np.ndarray,
+        action_high: np.ndarray,
+    ) -> None:
+        super().__init__()
+        if config.obs_shape is None:
+            raise ValueError("MAPPOAttentionPolicy requires config.obs_shape.")
+
+        self.config = config
+        self.encoder = KinematicAttentionEncoder(
+            obs_shape=config.obs_shape,
+            features_dim=config.features_dim,
+            d_model=config.d_model,
+            mode=config.attn_mode,
+            x_index=config.x_index,
+            vx_index=config.vx_index,
+            oracle_rule=config.oracle_rule,
+            ttc_eps=config.ttc_eps,
+        )
+        self.actor_mean = nn.Linear(config.features_dim, config.action_dim)
+        self.log_std = nn.Parameter(torch.zeros(config.action_dim))
+        self.critic = CentralizedCritic(
+            config.state_dim,
+            config.num_agents,
+            config.hidden_dim,
+        )
+
+        self.register_buffer(
+            "action_low",
+            torch.as_tensor(action_low, dtype=torch.float32),
+        )
+        self.register_buffer(
+            "action_high",
+            torch.as_tensor(action_high, dtype=torch.float32),
+        )
+
+    @property
+    def device(self) -> torch.device:
+        return next(self.parameters()).device
+
+    @property
+    def last_attention(self):
+        return self.encoder.last_attention
+
+    def distribution(self, obs: torch.Tensor) -> Normal:
+        features = self.encoder(obs)
+        mean = self.actor_mean(features)
+        std = self.log_std.exp().expand_as(mean)
+        return Normal(mean, std)
+
+    def act(
+        self,
+        obs: torch.Tensor,
+        states: torch.Tensor,
+        agent_ids: torch.Tensor,
+        *,
+        deterministic: bool,
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
+        dist = self.distribution(obs)
+        raw_actions = dist.mean if deterministic else dist.sample()
+        clipped_actions = torch.clamp(raw_actions, self.action_low, self.action_high)
+        log_probs = dist.log_prob(raw_actions).sum(dim=-1)
+        values = self.critic(states, agent_ids)
+        return raw_actions, clipped_actions, log_probs, values
+
+    def evaluate_actions(
+        self,
+        obs: torch.Tensor,
+        states: torch.Tensor,
+        agent_ids: torch.Tensor,
+        actions: torch.Tensor,
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        dist = self.distribution(obs)
+        log_probs = dist.log_prob(actions).sum(dim=-1)
+        entropies = dist.entropy().sum(dim=-1)
+        values = self.critic(states, agent_ids)
+        return log_probs, entropies, values
+
+
 def save_mappo_checkpoint(
     path: str | Path,
     *,
@@ -153,17 +251,25 @@ def load_mappo_checkpoint(
     path: str | Path,
     *,
     device: str | torch.device = "cpu",
-) -> tuple[MAPPOPolicy, dict[str, Any]]:
+) -> tuple[nn.Module, dict[str, Any]]:
     checkpoint = torch.load(path, map_location=device)
     config = MAPPOConfig(**checkpoint["config"])
     metadata = checkpoint.get("metadata", {})
     action_low = np.asarray(metadata["action_low"], dtype=np.float32)
     action_high = np.asarray(metadata["action_high"], dtype=np.float32)
-    policy = MAPPOPolicy(
-        config,
-        action_low=action_low,
-        action_high=action_high,
-    ).to(device)
+    policy_kind = metadata.get("policy_kind", getattr(config, "policy_kind", "baseline"))
+    if policy_kind == "attn":
+        policy = MAPPOAttentionPolicy(
+            config,
+            action_low=action_low,
+            action_high=action_high,
+        ).to(device)
+    else:
+        policy = MAPPOPolicy(
+            config,
+            action_low=action_low,
+            action_high=action_high,
+        ).to(device)
     policy.load_state_dict(checkpoint["policy_state_dict"])
     policy.eval()
     return policy, metadata

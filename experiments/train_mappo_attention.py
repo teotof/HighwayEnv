@@ -12,15 +12,15 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from experiments.mappo_core import (  # noqa: E402
+    MAPPOAttentionPolicy,
     MAPPOConfig,
-    MAPPOPolicy,
     explained_variance,
     save_mappo_checkpoint,
 )
 from experiments.mappo_utils import (  # noqa: E402
     build_centralized_inputs,
     extract_slot_rewards,
-    mappo_run_name,
+    mappo_attention_run_name,
     parse_seeds,
     world_metrics_from_slots,
 )
@@ -55,6 +55,13 @@ NUM_MINIBATCHES = int(os.getenv("NUM_MINIBATCHES", "4"))
 TARGET_KL_RAW = os.getenv("TARGET_KL", "")
 TARGET_KL = float(TARGET_KL_RAW) if TARGET_KL_RAW else None
 CLIP_VLOSS = os.getenv("CLIP_VLOSS", "true").strip().lower() != "false"
+ATTN_MODE = os.getenv("ATTN_MODE", "learned").strip().lower()
+X_INDEX = int(os.getenv("X_INDEX", "1"))
+VX_INDEX = int(os.getenv("VX_INDEX", "3"))
+ORACLE_RULE = os.getenv("ORACLE_RULE", "leader_x").strip().lower()
+TTC_EPS = float(os.getenv("TTC_EPS", "1e-6"))
+FEATURES_DIM = int(os.getenv("FEATURES_DIM", "128"))
+D_MODEL = int(os.getenv("D_MODEL", "32"))
 
 DEFAULT_VEC_MODE = "sync" if os.name == "nt" else "async"
 VEC_MODE = os.getenv("VEC_MODE", DEFAULT_VEC_MODE).strip().lower()
@@ -78,10 +85,11 @@ if __name__ == "__main__":
     MONITOR_ROOT.mkdir(parents=True, exist_ok=True)
 
     for seed in SEEDS:
-        run_name = mappo_run_name(
+        run_name = mappo_attention_run_name(
             SCENARIO_NAME,
             EXP_VERSION,
             CONTROLLED_VEHICLES,
+            ATTN_MODE,
             seed,
         )
         writer = make_writer(run_name)
@@ -98,6 +106,7 @@ if __name__ == "__main__":
         )
         test_obs, _ = test_env.reset(seed=seed)
         agent_obs = np.asarray(test_obs[0], dtype=np.float32)
+        obs_shape = tuple(agent_obs.shape)
         obs_dim = int(agent_obs.size)
         action_space = test_env.action_space.spaces[0]
         action_dim = int(np.prod(action_space.shape))
@@ -138,7 +147,7 @@ if __name__ == "__main__":
             f"{run_name}: worlds={N_WORLDS}, agents_per_world={CONTROLLED_VEHICLES}, "
             f"ppo_slots={num_envs}, vec_mode={VEC_MODE}, n_steps={PPO_N_STEPS}, "
             f"num_updates={num_updates}, total_timesteps_actual={total_timesteps_actual}, "
-            f"reward_mode={REWARD_MODE}",
+            f"reward_mode={REWARD_MODE}, attn_mode={ATTN_MODE}, oracle_rule={ORACLE_RULE}",
             flush=True,
         )
 
@@ -147,8 +156,8 @@ if __name__ == "__main__":
             state_dim=state_dim,
             action_dim=action_dim,
             num_agents=CONTROLLED_VEHICLES,
-            obs_shape=tuple(agent_obs.shape),
-            policy_kind="baseline",
+            obs_shape=obs_shape,
+            policy_kind="attn",
             hidden_dim=HIDDEN_DIM,
             learning_rate=LEARNING_RATE,
             gamma=GAMMA,
@@ -161,9 +170,16 @@ if __name__ == "__main__":
             num_minibatches=NUM_MINIBATCHES,
             clip_vloss=CLIP_VLOSS,
             target_kl=TARGET_KL,
+            features_dim=FEATURES_DIM,
+            d_model=D_MODEL,
+            attn_mode=ATTN_MODE,
+            x_index=X_INDEX,
+            vx_index=VX_INDEX,
+            oracle_rule=ORACLE_RULE,
+            ttc_eps=TTC_EPS,
         )
 
-        policy = MAPPOPolicy(
+        policy = MAPPOAttentionPolicy(
             config,
             action_low=np.asarray(action_space.low, dtype=np.float32),
             action_high=np.asarray(action_space.high, dtype=np.float32),
@@ -173,7 +189,7 @@ if __name__ == "__main__":
         obs = env.reset()
         global_step = 0
 
-        obs_buf = np.zeros((PPO_N_STEPS, num_envs, obs_dim), dtype=np.float32)
+        obs_buf = np.zeros((PPO_N_STEPS, num_envs, *obs_shape), dtype=np.float32)
         state_buf = np.zeros((PPO_N_STEPS, num_envs, state_dim), dtype=np.float32)
         action_buf = np.zeros((PPO_N_STEPS, num_envs, action_dim), dtype=np.float32)
         logprob_buf = np.zeros((PPO_N_STEPS, num_envs), dtype=np.float32)
@@ -189,18 +205,19 @@ if __name__ == "__main__":
 
         for update in range(1, num_updates + 1):
             for step in range(PPO_N_STEPS):
-                local_obs, states, agent_ids = build_centralized_inputs(
-                    obs,
+                obs_batch = np.asarray(obs, dtype=np.float32)
+                _, states, agent_ids = build_centralized_inputs(
+                    obs_batch,
                     num_agents=CONTROLLED_VEHICLES,
                 )
 
-                obs_buf[step] = local_obs
+                obs_buf[step] = obs_batch
                 state_buf[step] = states
                 agent_id_buf[step] = agent_ids
 
                 with torch.no_grad():
                     raw_actions_t, clipped_actions_t, log_probs_t, values_t = policy.act(
-                        torch.as_tensor(local_obs, dtype=torch.float32, device=DEVICE),
+                        torch.as_tensor(obs_batch, dtype=torch.float32, device=DEVICE),
                         torch.as_tensor(states, dtype=torch.float32, device=DEVICE),
                         torch.as_tensor(agent_ids, dtype=torch.long, device=DEVICE),
                         deterministic=False,
@@ -243,8 +260,9 @@ if __name__ == "__main__":
                 global_step += num_envs
 
             with torch.no_grad():
+                next_obs_batch = np.asarray(obs, dtype=np.float32)
                 _, next_states, next_agent_ids = build_centralized_inputs(
-                    obs,
+                    next_obs_batch,
                     num_agents=CONTROLLED_VEHICLES,
                 )
                 next_values = policy.critic(
@@ -266,7 +284,7 @@ if __name__ == "__main__":
                 advantages[t] = lastgaelam
             returns = advantages + value_buf
 
-            b_obs = torch.as_tensor(obs_buf.reshape(-1, obs_dim), dtype=torch.float32, device=DEVICE)
+            b_obs = torch.as_tensor(obs_buf.reshape(-1, *obs_shape), dtype=torch.float32, device=DEVICE)
             b_states = torch.as_tensor(
                 state_buf.reshape(-1, state_dim), dtype=torch.float32, device=DEVICE
             )
@@ -407,12 +425,19 @@ if __name__ == "__main__":
             "run_name": run_name,
             "scenario_name": SCENARIO_NAME,
             "exp_version": EXP_VERSION,
-            "policy_kind": "baseline",
+            "policy_kind": "attn",
             "controlled_vehicles": CONTROLLED_VEHICLES,
             "seed": seed,
             "reward_mode": REWARD_MODE,
             "num_worlds": N_WORLDS,
             "ppo_n_steps": PPO_N_STEPS,
+            "attn_mode": ATTN_MODE,
+            "x_index": X_INDEX,
+            "vx_index": VX_INDEX,
+            "oracle_rule": ORACLE_RULE,
+            "ttc_eps": TTC_EPS,
+            "features_dim": FEATURES_DIM,
+            "d_model": D_MODEL,
             "action_low": np.asarray(action_space.low, dtype=np.float32).tolist(),
             "action_high": np.asarray(action_space.high, dtype=np.float32).tolist(),
         }

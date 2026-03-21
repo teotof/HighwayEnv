@@ -28,11 +28,16 @@ def predict_mappo_actions(
         obs_batch,
         num_agents=len(obs),
     )
+    actor_obs = (
+        obs_batch.astype(np.float32)
+        if getattr(policy, "expects_matrix_obs", False)
+        else local_obs
+    )
 
     device = policy.device
     with torch.no_grad():
         _, clipped_actions, _, _ = policy.act(
-            torch.as_tensor(local_obs, dtype=torch.float32, device=device),
+            torch.as_tensor(actor_obs, dtype=torch.float32, device=device),
             torch.as_tensor(states, dtype=torch.float32, device=device),
             torch.as_tensor(agent_ids, dtype=torch.long, device=device),
             deterministic=deterministic,
