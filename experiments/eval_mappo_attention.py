@@ -20,20 +20,7 @@ SEED = int(os.getenv("SEED", "0"))
 ATTN_MODE = os.getenv("ATTN_MODE", "learned").strip().lower()
 CONTROLLED_VEHICLES = int(os.getenv("CONTROLLED_VEHICLES", "2"))
 MODEL_DIR = Path(os.getenv("MODEL_DIR", "runs/models"))
-MODEL_PATH = os.getenv(
-    "MODEL_PATH",
-    str(
-        resolve_mappo_model_path(
-            MODEL_DIR,
-            SCENARIO_NAME,
-            EXP_VERSION,
-            CONTROLLED_VEHICLES,
-            SEED,
-            model_kind="attn",
-            attn_mode=ATTN_MODE,
-        )
-    ),
-)
+MODEL_PATH_RAW = os.getenv("MODEL_PATH", "").strip()
 STEPS = int(os.getenv("STEPS", "0"))
 DEVICE = os.getenv("DEVICE", "cpu")
 
@@ -50,7 +37,18 @@ def output_dir() -> Path:
 
 
 def main():
-    model_path = Path(MODEL_PATH)
+    if MODEL_PATH_RAW:
+        model_path = Path(MODEL_PATH_RAW)
+    else:
+        model_path = resolve_mappo_model_path(
+            MODEL_DIR,
+            SCENARIO_NAME,
+            EXP_VERSION,
+            CONTROLLED_VEHICLES,
+            SEED,
+            model_kind="attn",
+            attn_mode=ATTN_MODE,
+        )
     if not model_path.is_file():
         raise FileNotFoundError(f"Model not found: {model_path}")
 
