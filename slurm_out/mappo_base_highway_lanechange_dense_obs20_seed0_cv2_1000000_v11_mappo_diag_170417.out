@@ -1,0 +1,184 @@
+Loading Anaconda 3 2024.02-1
+SCENARIO_NAME=highway_lanechange_dense_obs20
+EXP_VERSION=v11_mappo_diag
+TOTAL_TIMESTEPS=1000000
+SEEDS=0
+CONTROLLED_VEHICLES=2
+N_WORLDS=4
+VEC_MODE=async
+TARGET_ROLLOUT_SIZE=16384
+DEVICE=cpu
+MODEL_DIR=runs/models
+MONITOR_ROOT=runs/monitor
+TB_DIR=runs/tb
+REWARD_MODE=team
+HIDDEN_DIM=128
+LEARNING_RATE=3e-4
+GAMMA=0.99
+GAE_LAMBDA=0.95
+CLIP_RANGE=0.2
+ENT_COEF=0.0
+VF_COEF=0.5
+MAX_GRAD_NORM=0.5
+UPDATE_EPOCHS=10
+NUM_MINIBATCHES=4
+TARGET_KL=
+CLIP_VLOSS=true
+mappo_highway_lanechange_dense_obs20_v11_mappo_diag_cv2_seed0 agents: 2 agent obs shape: (20, 5) joint action space: Tuple(Box(-1.0, 1.0, (2,), float32), Box(-1.0, 1.0, (2,), float32))
+mappo_highway_lanechange_dense_obs20_v11_mappo_diag_cv2_seed0: worlds=4, agents_per_world=2, ppo_slots=8, vec_mode=async, n_steps=2048, num_updates=61, total_timesteps_actual=999424, reward_mode=team
+update=1/61 global_step=16384 ep_rew_mean=0.757 ep_len_mean=3.380 policy_loss=0.0198 value_loss=1.4236 entropy=2.8265 approx_kl=0.00544 clipfrac=0.0650 explained_variance=0.0036
+update=2/61 global_step=32768 ep_rew_mean=0.710 ep_len_mean=3.400 policy_loss=0.0028 value_loss=1.2660 entropy=2.8171 approx_kl=0.00572 clipfrac=0.0403 explained_variance=0.0464
+update=3/61 global_step=49152 ep_rew_mean=0.867 ep_len_mean=3.940 policy_loss=-0.0090 value_loss=1.1896 entropy=2.8056 approx_kl=0.00449 clipfrac=0.0551 explained_variance=0.0707
+update=4/61 global_step=65536 ep_rew_mean=0.938 ep_len_mean=3.430 policy_loss=0.0121 value_loss=1.0982 entropy=2.7923 approx_kl=0.00754 clipfrac=0.0734 explained_variance=0.0501
+update=5/61 global_step=81920 ep_rew_mean=1.137 ep_len_mean=4.120 policy_loss=-0.0124 value_loss=1.1929 entropy=2.7744 approx_kl=0.00652 clipfrac=0.0790 explained_variance=0.0758
+update=6/61 global_step=98304 ep_rew_mean=1.194 ep_len_mean=5.020 policy_loss=0.0018 value_loss=1.1626 entropy=2.7588 approx_kl=0.00826 clipfrac=0.0923 explained_variance=0.0712
+update=7/61 global_step=114688 ep_rew_mean=1.414 ep_len_mean=5.240 policy_loss=-0.0264 value_loss=1.3583 entropy=2.7438 approx_kl=0.01059 clipfrac=0.1126 explained_variance=0.0680
+update=8/61 global_step=131072 ep_rew_mean=1.702 ep_len_mean=5.650 policy_loss=0.0039 value_loss=1.4667 entropy=2.7269 approx_kl=0.01247 clipfrac=0.1021 explained_variance=0.0314
+update=9/61 global_step=147456 ep_rew_mean=2.128 ep_len_mean=6.820 policy_loss=-0.0076 value_loss=1.8644 entropy=2.7127 approx_kl=0.00833 clipfrac=0.0890 explained_variance=0.0437
+update=10/61 global_step=163840 ep_rew_mean=2.536 ep_len_mean=8.290 policy_loss=-0.0008 value_loss=2.1136 entropy=2.7015 approx_kl=0.00835 clipfrac=0.0908 explained_variance=0.0474
+update=11/61 global_step=180224 ep_rew_mean=3.416 ep_len_mean=10.690 policy_loss=-0.0237 value_loss=2.6052 entropy=2.6924 approx_kl=0.00679 clipfrac=0.0647 explained_variance=0.0447
+update=12/61 global_step=196608 ep_rew_mean=4.342 ep_len_mean=12.470 policy_loss=-0.0160 value_loss=2.8582 entropy=2.6827 approx_kl=0.00645 clipfrac=0.0642 explained_variance=0.0413
+update=13/61 global_step=212992 ep_rew_mean=4.234 ep_len_mean=13.650 policy_loss=-0.0161 value_loss=3.0206 entropy=2.6772 approx_kl=0.00267 clipfrac=0.0437 explained_variance=0.0525
+update=14/61 global_step=229376 ep_rew_mean=4.760 ep_len_mean=15.110 policy_loss=-0.0299 value_loss=3.3450 entropy=2.6704 approx_kl=0.00164 clipfrac=0.0643 explained_variance=0.0570
+update=15/61 global_step=245760 ep_rew_mean=5.468 ep_len_mean=16.430 policy_loss=-0.0027 value_loss=3.2344 entropy=2.6649 approx_kl=0.00329 clipfrac=0.0491 explained_variance=0.0590
+update=16/61 global_step=262144 ep_rew_mean=6.719 ep_len_mean=19.910 policy_loss=-0.0123 value_loss=4.5088 entropy=2.6584 approx_kl=0.00727 clipfrac=0.0682 explained_variance=0.0620
+update=17/61 global_step=278528 ep_rew_mean=7.555 ep_len_mean=26.150 policy_loss=-0.0187 value_loss=5.5718 entropy=2.6524 approx_kl=0.00298 clipfrac=0.0260 explained_variance=0.0676
+update=18/61 global_step=294912 ep_rew_mean=7.348 ep_len_mean=24.690 policy_loss=-0.0066 value_loss=6.1095 entropy=2.6462 approx_kl=0.00375 clipfrac=0.0323 explained_variance=0.0746
+update=19/61 global_step=311296 ep_rew_mean=9.630 ep_len_mean=30.860 policy_loss=-0.0123 value_loss=6.1386 entropy=2.6424 approx_kl=0.00181 clipfrac=0.0205 explained_variance=0.0913
+update=20/61 global_step=327680 ep_rew_mean=6.975 ep_len_mean=26.650 policy_loss=0.0129 value_loss=6.0057 entropy=2.6372 approx_kl=0.00176 clipfrac=0.0238 explained_variance=0.0857
+update=21/61 global_step=344064 ep_rew_mean=8.783 ep_len_mean=31.040 policy_loss=0.0016 value_loss=6.4196 entropy=2.6323 approx_kl=0.00358 clipfrac=0.0213 explained_variance=0.1101
+update=22/61 global_step=360448 ep_rew_mean=10.058 ep_len_mean=35.940 policy_loss=0.0045 value_loss=5.9199 entropy=2.6289 approx_kl=0.00353 clipfrac=0.0178 explained_variance=0.1601
+update=23/61 global_step=376832 ep_rew_mean=8.779 ep_len_mean=30.950 policy_loss=-0.0043 value_loss=5.7419 entropy=2.6253 approx_kl=0.00441 clipfrac=0.0293 explained_variance=0.1529
+update=24/61 global_step=393216 ep_rew_mean=11.017 ep_len_mean=37.360 policy_loss=-0.0024 value_loss=5.6129 entropy=2.6175 approx_kl=0.00424 clipfrac=0.0332 explained_variance=0.2111
+update=25/61 global_step=409600 ep_rew_mean=12.408 ep_len_mean=41.000 policy_loss=-0.0026 value_loss=5.3683 entropy=2.6118 approx_kl=0.00226 clipfrac=0.0192 explained_variance=0.2695
+update=26/61 global_step=425984 ep_rew_mean=10.251 ep_len_mean=38.790 policy_loss=0.0129 value_loss=5.9207 entropy=2.6077 approx_kl=0.00275 clipfrac=0.0356 explained_variance=0.2744
+update=27/61 global_step=442368 ep_rew_mean=9.775 ep_len_mean=39.880 policy_loss=-0.0020 value_loss=5.4462 entropy=2.6022 approx_kl=0.00115 clipfrac=0.0133 explained_variance=0.3064
+update=28/61 global_step=458752 ep_rew_mean=9.468 ep_len_mean=36.220 policy_loss=0.0113 value_loss=5.6923 entropy=2.5974 approx_kl=0.00142 clipfrac=0.0199 explained_variance=0.3112
+update=29/61 global_step=475136 ep_rew_mean=10.124 ep_len_mean=40.110 policy_loss=0.0038 value_loss=5.9054 entropy=2.5950 approx_kl=0.00534 clipfrac=0.0177 explained_variance=0.3504
+update=30/61 global_step=491520 ep_rew_mean=11.767 ep_len_mean=44.240 policy_loss=0.0118 value_loss=5.5472 entropy=2.5929 approx_kl=0.00133 clipfrac=0.0388 explained_variance=0.3652
+update=31/61 global_step=507904 ep_rew_mean=10.839 ep_len_mean=37.960 policy_loss=0.0053 value_loss=5.4806 entropy=2.5915 approx_kl=0.00373 clipfrac=0.0205 explained_variance=0.3635
+update=32/61 global_step=524288 ep_rew_mean=11.624 ep_len_mean=38.430 policy_loss=-0.0212 value_loss=4.9885 entropy=2.5903 approx_kl=0.00305 clipfrac=0.0202 explained_variance=0.3732
+update=33/61 global_step=540672 ep_rew_mean=11.526 ep_len_mean=38.700 policy_loss=-0.0155 value_loss=5.8402 entropy=2.5893 approx_kl=0.00383 clipfrac=0.0110 explained_variance=0.3473
+update=34/61 global_step=557056 ep_rew_mean=12.150 ep_len_mean=44.720 policy_loss=0.0000 value_loss=6.0020 entropy=2.5877 approx_kl=0.00235 clipfrac=0.0069 explained_variance=0.3932
+update=35/61 global_step=573440 ep_rew_mean=10.440 ep_len_mean=38.060 policy_loss=0.0011 value_loss=6.1368 entropy=2.5868 approx_kl=0.00272 clipfrac=0.0055 explained_variance=0.3661
+update=36/61 global_step=589824 ep_rew_mean=11.296 ep_len_mean=39.880 policy_loss=0.0033 value_loss=6.5028 entropy=2.5842 approx_kl=0.00412 clipfrac=0.0162 explained_variance=0.3605
+update=37/61 global_step=606208 ep_rew_mean=12.881 ep_len_mean=39.580 policy_loss=-0.0086 value_loss=6.0567 entropy=2.5833 approx_kl=0.00265 clipfrac=0.0122 explained_variance=0.3295
+update=38/61 global_step=622592 ep_rew_mean=13.907 ep_len_mean=44.470 policy_loss=0.0098 value_loss=6.3348 entropy=2.5822 approx_kl=0.00313 clipfrac=0.0082 explained_variance=0.3480
+update=39/61 global_step=638976 ep_rew_mean=11.160 ep_len_mean=36.720 policy_loss=-0.0048 value_loss=7.0536 entropy=2.5816 approx_kl=0.00304 clipfrac=0.0085 explained_variance=0.3155
+update=40/61 global_step=655360 ep_rew_mean=12.687 ep_len_mean=40.980 policy_loss=0.0274 value_loss=7.1564 entropy=2.5769 approx_kl=0.00162 clipfrac=0.0830 explained_variance=0.3766
+update=41/61 global_step=671744 ep_rew_mean=14.057 ep_len_mean=44.920 policy_loss=-0.0135 value_loss=7.4626 entropy=2.5723 approx_kl=0.00183 clipfrac=0.0323 explained_variance=0.3561
+update=42/61 global_step=688128 ep_rew_mean=10.909 ep_len_mean=34.640 policy_loss=0.0028 value_loss=7.3823 entropy=2.5702 approx_kl=0.01071 clipfrac=0.0420 explained_variance=0.3404
+update=43/61 global_step=704512 ep_rew_mean=10.743 ep_len_mean=36.060 policy_loss=-0.0049 value_loss=8.0163 entropy=2.5681 approx_kl=0.00433 clipfrac=0.0327 explained_variance=0.3097
+update=44/61 global_step=720896 ep_rew_mean=13.792 ep_len_mean=41.870 policy_loss=-0.0064 value_loss=7.1743 entropy=2.5656 approx_kl=0.00283 clipfrac=0.0175 explained_variance=0.4132
+update=45/61 global_step=737280 ep_rew_mean=11.208 ep_len_mean=34.990 policy_loss=0.0022 value_loss=7.0311 entropy=2.5630 approx_kl=0.00369 clipfrac=0.0468 explained_variance=0.3882
+update=46/61 global_step=753664 ep_rew_mean=12.619 ep_len_mean=36.920 policy_loss=0.0159 value_loss=7.1518 entropy=2.5586 approx_kl=0.00325 clipfrac=0.0196 explained_variance=0.3377
+update=47/61 global_step=770048 ep_rew_mean=13.445 ep_len_mean=38.480 policy_loss=-0.0041 value_loss=7.7658 entropy=2.5575 approx_kl=0.00275 clipfrac=0.0145 explained_variance=0.3719
+update=48/61 global_step=786432 ep_rew_mean=11.507 ep_len_mean=33.990 policy_loss=-0.0345 value_loss=7.2940 entropy=2.5549 approx_kl=0.00185 clipfrac=0.0105 explained_variance=0.4017
+update=49/61 global_step=802816 ep_rew_mean=12.276 ep_len_mean=34.600 policy_loss=-0.0102 value_loss=7.9950 entropy=2.5522 approx_kl=0.00255 clipfrac=0.0119 explained_variance=0.3814
+update=50/61 global_step=819200 ep_rew_mean=12.234 ep_len_mean=35.300 policy_loss=-0.0049 value_loss=8.9418 entropy=2.5488 approx_kl=0.00270 clipfrac=0.0492 explained_variance=0.3472
+update=51/61 global_step=835584 ep_rew_mean=12.659 ep_len_mean=35.930 policy_loss=-0.0057 value_loss=8.8651 entropy=2.5485 approx_kl=0.00238 clipfrac=0.0235 explained_variance=0.3605
+update=52/61 global_step=851968 ep_rew_mean=11.720 ep_len_mean=34.900 policy_loss=0.0036 value_loss=9.2754 entropy=2.5455 approx_kl=0.00173 clipfrac=0.0458 explained_variance=0.3684
+update=53/61 global_step=868352 ep_rew_mean=14.403 ep_len_mean=39.010 policy_loss=-0.0389 value_loss=8.9631 entropy=2.5440 approx_kl=0.00196 clipfrac=0.0036 explained_variance=0.3837
+update=54/61 global_step=884736 ep_rew_mean=13.472 ep_len_mean=36.930 policy_loss=0.0484 value_loss=9.5146 entropy=2.5434 approx_kl=0.00179 clipfrac=0.0045 explained_variance=0.3651
+update=55/61 global_step=901120 ep_rew_mean=14.292 ep_len_mean=39.680 policy_loss=-0.0097 value_loss=8.8377 entropy=2.5427 approx_kl=0.00136 clipfrac=0.0131 explained_variance=0.4028
+update=56/61 global_step=917504 ep_rew_mean=13.788 ep_len_mean=38.030 policy_loss=0.0012 value_loss=7.8359 entropy=2.5413 approx_kl=0.00263 clipfrac=0.0281 explained_variance=0.4157
+update=57/61 global_step=933888 ep_rew_mean=11.415 ep_len_mean=33.700 policy_loss=0.0227 value_loss=9.0340 entropy=2.5381 approx_kl=0.01638 clipfrac=0.0584 explained_variance=0.3830
+update=58/61 global_step=950272 ep_rew_mean=12.336 ep_len_mean=33.380 policy_loss=-0.0326 value_loss=7.0508 entropy=2.5365 approx_kl=0.00271 clipfrac=0.0180 explained_variance=0.4527
+update=59/61 global_step=966656 ep_rew_mean=14.299 ep_len_mean=37.440 policy_loss=0.0189 value_loss=7.4141 entropy=2.5356 approx_kl=0.00442 clipfrac=0.0214 explained_variance=0.4508
+update=60/61 global_step=983040 ep_rew_mean=14.567 ep_len_mean=40.050 policy_loss=-0.0108 value_loss=8.1358 entropy=2.5341 approx_kl=0.00291 clipfrac=0.0156 explained_variance=0.4255
+update=61/61 global_step=999424 ep_rew_mean=12.953 ep_len_mean=37.090 policy_loss=0.0004 value_loss=8.8383 entropy=2.5336 approx_kl=0.00141 clipfrac=0.0277 explained_variance=0.4100
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 170417 (mappo_base_highway_lanechange_dense_obs20_seed0_cv2_1000000_v11_mappo_diag) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Fri Mar 27 13:14:37 GMT 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 170417
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 06:27:11
+CPU Efficiency: 19.31% of 1-09:25:04 core-walltime
+Job Wall-clock time: 02:05:19
+Memory Utilized: 1.13 GB
+Memory Efficiency: 3.53% of 32.00 GB (32.00 GB/node)
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+170417       mappo_bas+        16             1                                                      02:05:19  COMPLETED      0:0 
+170417.batch      batch        16      1      1   1185836K    callan-n08      978.53M      918.92M   02:05:19  COMPLETED      0:0 
+170417.exte+     extern        16      1      1                                                      02:05:19  COMPLETED      0:0 
+
+
+Job details:
+============
+
+JobId=170417 JobName=mappo_base_highway_lanechange_dense_obs20_seed0_cv2_1000000_v11_mappo_diag
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=116493 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=02:05:19 TimeLimit=2-00:00:00 TimeMin=N/A
+   SubmitTime=2026-03-26T23:55:13 EligibleTime=2026-03-26T23:55:13
+   AccrueTime=2026-03-26T23:55:13
+   StartTime=2026-03-27T11:09:18 EndTime=2026-03-27T13:14:37 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-03-27T11:09:18 Scheduler=Main
+   Partition=compute AllocNode:Sid=callan01:1431434
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n08
+   BatchHost=callan-n08
+   NumNodes=1 NumCPUs=16 NumTasks=1 CPUs/Task=16 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=16,mem=32G,node=1,billing=16
+   AllocTRES=cpu=16,mem=32G,node=1,billing=16
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n08 CPU_IDs=40-55 Mem=32768 GRES=
+   MinCPUsNode=16 MinMemoryNode=32G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/train_mappo.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/mappo_base_highway_lanechange_dense_obs20_seed0_cv2_1000000_v11_mappo_diag_170417.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/mappo_base_highway_lanechange_dense_obs20_seed0_cv2_1000000_v11_mappo_diag_170417.out
+   TresPerTask=cpu=16
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4952671          0          0       1512     none |   397162       0        0      681     none
+root       FILESET     5203659          0          0       4426     none |  9920445       0        0     1626     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot      11,675 | CALLAN_HADJITOT    11,675 |       300,000   288,325
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################

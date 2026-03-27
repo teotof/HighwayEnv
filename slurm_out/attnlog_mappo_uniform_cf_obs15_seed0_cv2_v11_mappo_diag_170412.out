@@ -1,0 +1,111 @@
+Loading Anaconda 3 2024.02-1
+SCENARIO_NAME=cf_obs15
+EXP_VERSION=v11_mappo_diag
+SEED=0
+ATTN_MODE=uniform
+CONTROLLED_VEHICLES=2
+MODEL_DIR=runs/models
+MODEL_PATH=
+STEPS=5000
+DEVICE=cpu
+SCENARIO_NAME=cf_obs15 SEED=0 ATTN_MODE=uniform CONTROLLED_VEHICLES=2
+Resolved MODEL_PATH=/home/users/hadjitot/fyp/HighwayEnv/runs/models/mappo_attn_uniform_cf_obs15_v11_mappo_diag_cv2_seed0.pt
+Per-agent env obs shape: (15, 5)
+Checkpoint policy_kind: attn
+Attention log steps: 5000
+Saved: (5000, 2, 14) (5000, 2, 14) (5000, 2, 14) (5000, 2, 14)
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 170412 (attnlog_mappo_uniform_cf_obs15_seed0_cv2_v11_mappo_diag) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Fri Mar 27 09:10:34 GMT 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 170412
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 4
+CPU Utilized: 00:02:14
+CPU Efficiency: 20.18% of 00:11:04 core-walltime
+Job Wall-clock time: 00:02:46
+Memory Utilized: 375.35 MB
+Memory Efficiency: 4.58% of 8.00 GB (8.00 GB/node)
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+170412       attnlog_m+         4             1                                                      00:02:46  COMPLETED      0:0 
+170412.batch      batch         4      1      1    384360K    callan-n05       47.86M        0.01M   00:02:46  COMPLETED      0:0 
+170412.exte+     extern         4      1      1                                                      00:02:46  COMPLETED      0:0 
+
+
+Job details:
+============
+
+JobId=170412 JobName=attnlog_mappo_uniform_cf_obs15_seed0_cv2_v11_mappo_diag
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=112951 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=00:02:46 TimeLimit=12:00:00 TimeMin=N/A
+   SubmitTime=2026-03-26T23:55:13 EligibleTime=2026-03-27T09:07:48
+   AccrueTime=Unknown
+   StartTime=2026-03-27T09:07:48 EndTime=2026-03-27T09:10:34 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-03-27T09:07:48 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=callan01:1431434
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n05
+   BatchHost=callan-n05
+   NumNodes=1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=4,mem=8G,node=1,billing=4
+   AllocTRES=cpu=4,mem=8G,node=1,billing=4
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n05 CPU_IDs=48-51 Mem=8192 GRES=
+   MinCPUsNode=4 MinMemoryNode=8G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/eval_mappo_attention.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/attnlog_mappo_uniform_cf_obs15_seed0_cv2_v11_mappo_diag_170412.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/attnlog_mappo_uniform_cf_obs15_seed0_cv2_v11_mappo_diag_170412.out
+   TresPerTask=cpu=4
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4949594          0          0       1764     none |   397009       0        0      564     none
+root       FILESET     5427388          0          0       3849     none |  9920370       0        0     1387     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot      11,491 | CALLAN_HADJITOT    11,491 |       300,000   288,509
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################
