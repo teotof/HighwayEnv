@@ -43,3 +43,7 @@ echo "STEPS=$STEPS"
 echo "DEVICE=$DEVICE"
 
 python experiments/eval_mappo_attention.py
+
+OUT_DIR="runs/attn_logs_mappo/${EXP_VERSION}/${ATTN_MODE}/${SCENARIO_NAME}/cv${CONTROLLED_VEHICLES}/seed${SEED}"
+mkdir -p "$OUT_DIR"
+python experiments/analyse_mappo_attention.py | tee "${OUT_DIR}/summary.txt"
