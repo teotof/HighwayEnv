@@ -100,9 +100,9 @@ def main():
     presence_log = np.array(presence_log)
 
     if ATTN_MODE:
-        out_dir = f"runs/attn_logs/{ATTN_MODE}/{SCENARIO_NAME}/seed{SEED}"
+        out_dir = f"runs/attn_logs/{EXP_VERSION}/{ATTN_MODE}/{SCENARIO_NAME}/seed{SEED}"
     else:
-        out_dir = f"runs/attn_logs/{SCENARIO_NAME}/seed{SEED}"
+        out_dir = f"runs/attn_logs/{EXP_VERSION}/{SCENARIO_NAME}/seed{SEED}"
     os.makedirs(out_dir, exist_ok=True)
     np.save(f"{out_dir}/attention.npy", attn_log)
     np.save(f"{out_dir}/dx.npy", dx_log)

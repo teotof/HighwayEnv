@@ -54,7 +54,21 @@ WRAPPER_CLASS = WRAPPER_MAP.get(WRAPPER_NAME)
 
 N_EVAL_EPISODES = int(os.getenv("N_EVAL_EPISODES", "50"))
 MAX_STEPS = int(os.getenv("MAX_STEPS", "0"))  # 0 means "auto from env config"
-SEEDS = [0, 1, 2]
+
+
+def parse_seeds(raw: str):
+    if not raw:
+        return [0, 1, 2]
+    seeds = []
+    for part in raw.split(","):
+        part = part.strip()
+        if not part:
+            continue
+        seeds.append(int(part))
+    return seeds if seeds else [0, 1, 2]
+
+
+SEEDS = parse_seeds(os.getenv("SEEDS", "0,1,2"))
 
 
 def auto_max_steps(env) -> int:
@@ -129,6 +143,8 @@ if __name__ == "__main__":
     print(f"Loading models trained on: {TRAIN_SCENARIO_NAME} (EXP_VERSION={EXP_VERSION})")
     print(f"Evaluating in env: {EVAL_SCENARIO_NAME} -> {ENV_ID}")
     print(f"Model kind: {MODEL_KIND}")
+    print(f"Seeds: {SEEDS}")
+    print(f"N_EVAL_EPISODES={N_EVAL_EPISODES}")
     if MODEL_KIND == "attn":
         print(f"Attention mode: {ATTN_MODE if ATTN_MODE else 'legacy-name'}")
 

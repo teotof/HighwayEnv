@@ -62,10 +62,15 @@ def compute_ttc_idx(dx: np.ndarray, vx: np.ndarray, pres: np.ndarray, eps: float
 
 def main():
     scenario = os.environ["SCENARIO_NAME"]
+    exp_version = os.getenv("EXP_VERSION", "").strip()
     seed = int(os.environ["SEED"])
     attn_mode = os.getenv("ATTN_MODE", "").strip()
 
-    if attn_mode:
+    if exp_version and attn_mode:
+        base = f"runs/attn_logs/{exp_version}/{attn_mode}/{scenario}/seed{seed}"
+    elif exp_version:
+        base = f"runs/attn_logs/{exp_version}/{scenario}/seed{seed}"
+    elif attn_mode:
         base = f"runs/attn_logs/{attn_mode}/{scenario}/seed{seed}"
     else:
         base = f"runs/attn_logs/{scenario}/seed{seed}"
