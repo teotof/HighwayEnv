@@ -43,9 +43,9 @@ fi
 export EXP_VERSION STEPS SCENARIO_NAME SEED ATTN_MODE MODEL_PATH
 
 if [ -n "${ATTN_MODE}" ]; then
-  OUT_DIR="runs/attn_logs/${ATTN_MODE}/${SCENARIO_NAME}/seed${SEED}"
+  OUT_DIR="runs/attn_logs/${EXP_VERSION}/${ATTN_MODE}/${SCENARIO_NAME}/seed${SEED}"
 else
-  OUT_DIR="runs/attn_logs/${SCENARIO_NAME}/seed${SEED}"
+  OUT_DIR="runs/attn_logs/${EXP_VERSION}/${SCENARIO_NAME}/seed${SEED}"
 fi
 mkdir -p "$OUT_DIR"
 
