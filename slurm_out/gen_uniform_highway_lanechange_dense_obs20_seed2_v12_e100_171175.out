@@ -1,0 +1,157 @@
+Loading Anaconda 3 2024.02-1
+TRAIN_SCENARIO_NAME=highway_lanechange_dense_obs20
+EVAL_SCENARIO_NAME=highway_lanechange_dense_obs20_shuffle
+EXP_VERSION=v12
+MODEL_KIND=attn
+ATTN_MODE=uniform
+Loading models trained on: highway_lanechange_dense_obs20 (EXP_VERSION=v12)
+Evaluating in env: highway_lanechange_dense_obs20_shuffle -> continuous-exit-v0
+Model kind: attn
+Seeds: [2]
+N_EVAL_EPISODES=100
+Attention mode: uniform
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=0/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=5/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=10/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=15/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=20/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=25/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=30/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=35/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=40/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=45/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=50/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=55/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=60/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=65/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=70/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=75/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=80/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=85/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=90/100
+[ppo_baseline_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=95/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=0/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=5/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=10/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=15/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=20/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=25/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=30/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=35/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=40/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=45/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=50/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=55/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=60/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=65/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=70/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=75/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=80/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=85/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=90/100
+[ppo_attn_uniform_highway_lanechange_dense_obs20_v12_seed2.zip] seed=2 ep=95/100
+
+BASELINE
+  return:     13.904 ± 0.000
+  crash_rate: 0.770 ± 0.000
+  ep_len:     42.740 ± 0.000
+
+ATTENTION (uniform)
+  return:     65.407 ± 0.000
+  crash_rate: 0.050 ± 0.000
+  ep_len:     133.480 ± 0.000
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 171175 (gen_uniform_highway_lanechange_dense_obs20_seed2_v12_e100) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Sat Mar 28 19:35:30 GMT 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 171175
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:10:57
+CPU Efficiency: 5.99% of 03:02:56 core-walltime
+Job Wall-clock time: 00:11:26
+Memory Utilized: 419.62 MB
+Memory Efficiency: 1.28% of 32.00 GB (32.00 GB/node)
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+171175       gen_unifo+        16             1                                                      00:11:26  COMPLETED      0:0 
+171175.batch      batch        16      1      1    429692K    callan-n07       61.65M        0.01M   00:11:26  COMPLETED      0:0 
+171175.exte+     extern        16      1      1                                                      00:11:26  COMPLETED      0:0 
+
+
+Job details:
+============
+
+JobId=171175 JobName=gen_uniform_highway_lanechange_dense_obs20_seed2_v12_e100
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=99886 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=00:11:26 TimeLimit=2-00:00:00 TimeMin=N/A
+   SubmitTime=2026-03-27T20:37:57 EligibleTime=2026-03-28T18:06:01
+   AccrueTime=2026-03-28T18:06:01
+   StartTime=2026-03-28T19:24:04 EndTime=2026-03-28T19:35:30 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-03-28T19:24:04 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=callan01:1076092
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n07
+   BatchHost=callan-n07
+   NumNodes=1 NumCPUs=16 NumTasks=1 CPUs/Task=16 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=16,mem=32G,node=1,billing=16
+   AllocTRES=cpu=16,mem=32G,node=1,billing=16
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n07 CPU_IDs=16-31 Mem=32768 GRES=
+   MinCPUsNode=16 MinMemoryNode=32G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/eval_metrics.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/gen_uniform_highway_lanechange_dense_obs20_seed2_v12_e100_171175.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/gen_uniform_highway_lanechange_dense_obs20_seed2_v12_e100_171175.out
+   TresPerTask=cpu=16
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4977977          0          0       2002     none |   398469       0        0      831     none
+root       FILESET     5358250          0          0       4894     none |  9914908       0        0     1755     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot      13,194 | CALLAN_HADJITOT    13,194 |       300,000   286,806
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################

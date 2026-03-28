@@ -1,0 +1,156 @@
+Loading Anaconda 3 2024.02-1
+TRAIN_SCENARIO_NAME=cf_obs15
+EVAL_SCENARIO_NAME=cf_obs15
+EXP_VERSION=v12
+MODEL_KIND=deepsets
+ATTN_MODE=legacy-name
+Loading models trained on: cf_obs15 (EXP_VERSION=v12)
+Evaluating in env: cf_obs15 -> continuous-highway-v0
+Model kind: deepsets
+Seeds: [0]
+N_EVAL_EPISODES=100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=0/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=5/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=10/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=15/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=20/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=25/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=30/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=35/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=40/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=45/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=50/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=55/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=60/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=65/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=70/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=75/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=80/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=85/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=90/100
+[ppo_baseline_cf_obs15_v12_seed0.zip] seed=0 ep=95/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=0/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=5/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=10/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=15/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=20/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=25/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=30/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=35/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=40/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=45/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=50/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=55/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=60/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=65/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=70/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=75/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=80/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=85/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=90/100
+[ppo_deepsets_cf_obs15_v12_seed0.zip] seed=0 ep=95/100
+
+BASELINE
+  return:     30.824 ± 0.000
+  crash_rate: 0.000 ± 0.000
+  ep_len:     150.000 ± 0.000
+
+DEEPSETS
+  return:     30.682 ± 0.000
+  crash_rate: 0.000 ± 0.000
+  ep_len:     150.000 ± 0.000
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 171064 (eval_deepsets_cf_obs15_seed0_v12_e100) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Sat Mar 28 18:07:43 GMT 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 171064
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:08:51
+CPU Efficiency: 6.01% of 02:27:12 core-walltime
+Job Wall-clock time: 00:09:12
+Memory Utilized: 418.96 MB
+Memory Efficiency: 1.28% of 32.00 GB (32.00 GB/node)
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+171064       eval_deep+        16             1                                                      00:09:12  COMPLETED      0:0 
+171064.batch      batch        16      1      1    429012K    callan-n07       61.65M        0.01M   00:09:12  COMPLETED      0:0 
+171064.exte+     extern        16      1      1                                                      00:09:12  COMPLETED      0:0 
+
+
+Job details:
+============
+
+JobId=171064 JobName=eval_deepsets_cf_obs15_seed0_v12_e100
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=103998 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=00:09:12 TimeLimit=2-00:00:00 TimeMin=N/A
+   SubmitTime=2026-03-27T20:37:56 EligibleTime=2026-03-28T02:51:04
+   AccrueTime=2026-03-28T02:51:04
+   StartTime=2026-03-28T17:58:31 EndTime=2026-03-28T18:07:43 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-03-28T17:58:31 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=callan01:1076092
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n07
+   BatchHost=callan-n07
+   NumNodes=1 NumCPUs=16 NumTasks=1 CPUs/Task=16 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=16,mem=32G,node=1,billing=16
+   AllocTRES=cpu=16,mem=32G,node=1,billing=16
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n07 CPU_IDs=32-47 Mem=32768 GRES=
+   MinCPUsNode=16 MinMemoryNode=32G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/eval_metrics.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/eval_deepsets_cf_obs15_seed0_v12_e100_171064.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/eval_deepsets_cf_obs15_seed0_v12_e100_171064.out
+   TresPerTask=cpu=16
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4976793          0          0       2278     none |   398339       0        0      985     none
+root       FILESET     5321481          0          0       4631     none |  9919997       0        0     1598     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot      13,068 | CALLAN_HADJITOT    13,068 |       300,000   286,932
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################

@@ -1,0 +1,156 @@
+Loading Anaconda 3 2024.02-1
+TRAIN_SCENARIO_NAME=cf_obs20_dense
+EVAL_SCENARIO_NAME=cf_obs20_dense
+EXP_VERSION=v12
+MODEL_KIND=deepsets
+ATTN_MODE=legacy-name
+Loading models trained on: cf_obs20_dense (EXP_VERSION=v12)
+Evaluating in env: cf_obs20_dense -> continuous-highway-v0
+Model kind: deepsets
+Seeds: [2]
+N_EVAL_EPISODES=100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=0/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=5/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=10/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=15/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=20/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=25/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=30/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=35/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=40/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=45/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=50/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=55/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=60/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=65/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=70/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=75/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=80/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=85/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=90/100
+[ppo_baseline_cf_obs20_dense_v12_seed2.zip] seed=2 ep=95/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=0/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=5/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=10/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=15/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=20/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=25/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=30/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=35/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=40/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=45/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=50/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=55/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=60/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=65/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=70/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=75/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=80/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=85/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=90/100
+[ppo_deepsets_cf_obs20_dense_v12_seed2.zip] seed=2 ep=95/100
+
+BASELINE
+  return:     5.686 ± 0.000
+  crash_rate: 0.630 ± 0.000
+  ep_len:     77.530 ± 0.000
+
+DEEPSETS
+  return:     8.461 ± 0.000
+  crash_rate: 0.630 ± 0.000
+  ep_len:     77.540 ± 0.000
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 171141 (eval_deepsets_cf_obs20_dense_seed2_v12_e100) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Sat Mar 28 19:07:21 GMT 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 171141
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 00:06:42
+CPU Efficiency: 5.37% of 02:04:48 core-walltime
+Job Wall-clock time: 00:07:48
+Memory Utilized: 506.49 MB
+Memory Efficiency: 1.55% of 32.00 GB (32.00 GB/node)
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+171141       eval_deep+        16             1                                                      00:07:48  COMPLETED      0:0 
+171141.batch      batch        16      1      1    518648K    callan-n01       61.69M        0.01M   00:07:48  COMPLETED      0:0 
+171141.exte+     extern        16      1      1                                                      00:07:48  COMPLETED      0:0 
+
+
+Job details:
+============
+
+JobId=171141 JobName=eval_deepsets_cf_obs20_dense_seed2_v12_e100
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=100380 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=00:07:48 TimeLimit=2-00:00:00 TimeMin=N/A
+   SubmitTime=2026-03-27T20:37:56 EligibleTime=2026-03-28T16:01:22
+   AccrueTime=2026-03-28T16:01:22
+   StartTime=2026-03-28T18:59:33 EndTime=2026-03-28T19:07:21 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-03-28T18:59:33 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=callan01:1076092
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n01
+   BatchHost=callan-n01
+   NumNodes=1 NumCPUs=16 NumTasks=1 CPUs/Task=16 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=16,mem=32G,node=1,billing=16
+   AllocTRES=cpu=16,mem=32G,node=1,billing=16
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n01 CPU_IDs=0-7,56-63 Mem=32768 GRES=
+   MinCPUsNode=16 MinMemoryNode=32G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/eval_metrics.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/eval_deepsets_cf_obs20_dense_seed2_v12_e100_171141.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/eval_deepsets_cf_obs20_dense_seed2_v12_e100_171141.out
+   TresPerTask=cpu=16
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4978135          0          0       2090     none |   398421       0        0      929     none
+root       FILESET     5323805          0          0       4576     none |  9918480       0        0     1638     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot      13,150 | CALLAN_HADJITOT    13,150 |       300,000   286,850
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################
