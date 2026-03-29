@@ -1,0 +1,29 @@
+steps=5000 agents=2 neighbours=14
+log_dir=runs/attn_logs_mappo/v12/uniform/cf_obs15_stopgo/cv2/seed0
+AGGREGATE
+  T: 10000 N: 14
+  argmax==leader hit rate: 0.8939
+  mean attention on leader: 0.28651047
+  mean attention entropy: 1.0147206
+  argmax==ttc_critical hit rate: 0.9272
+  mean attention on ttc_critical: 0.28651047
+  fraction steps with closing TTC candidate: 0.2298
+  mean min TTC (closing steps only): 2311.802001953125
+AGENT 0
+  T: 5000 N: 14
+  argmax==leader hit rate: 1.0
+  mean attention on leader: 0.22557168
+  mean attention entropy: 0.97224844
+  argmax==ttc_critical hit rate: 0.9942
+  mean attention on ttc_critical: 0.22557168
+  fraction steps with closing TTC candidate: 0.1724
+  mean min TTC (closing steps only): 10.451313018798828
+AGENT 1
+  T: 5000 N: 14
+  argmax==leader hit rate: 0.7878
+  mean attention on leader: 0.34744927
+  mean attention entropy: 1.0571928
+  argmax==ttc_critical hit rate: 0.8602
+  mean attention on ttc_critical: 0.34744927
+  fraction steps with closing TTC candidate: 0.2872
+  mean min TTC (closing steps only): 3693.25341796875

@@ -1,0 +1,29 @@
+steps=5000 agents=2 neighbours=4
+log_dir=runs/attn_logs_mappo/v12/learned/cf_v2/cv2/seed0
+AGGREGATE
+  T: 10000 N: 4
+  argmax==leader hit rate: 0.0
+  mean attention on leader: 0.255454
+  mean attention entropy: 1.3530188
+  argmax==ttc_critical hit rate: 0.0
+  mean attention on ttc_critical: 0.2554688
+  fraction steps with closing TTC candidate: 0.1718
+  mean min TTC (closing steps only): 17.7253360748291
+AGENT 0
+  T: 5000 N: 4
+  argmax==leader hit rate: 0.0
+  mean attention on leader: 0.24615502
+  mean attention entropy: 1.386228
+  argmax==ttc_critical hit rate: 0.0
+  mean attention on ttc_critical: 0.24617143
+  fraction steps with closing TTC candidate: 0.1718
+  mean min TTC (closing steps only): 19.305482864379883
+AGENT 1
+  T: 5000 N: 4
+  argmax==leader hit rate: 0.0
+  mean attention on leader: 0.26475295
+  mean attention entropy: 1.3198098
+  argmax==ttc_critical hit rate: 0.0
+  mean attention on ttc_critical: 0.26476613
+  fraction steps with closing TTC candidate: 0.1718
+  mean min TTC (closing steps only): 16.145187377929688
