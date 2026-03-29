@@ -1,0 +1,173 @@
+Loading Anaconda 3 2024.02-1
+TRAIN_SCENARIO_NAME=cf_obs15
+EVAL_SCENARIO_NAME=cf_obs15_shuffle
+EXP_VERSION=v12
+SEEDS=1
+CONTROLLED_VEHICLES=2
+N_EVAL_EPISODES=100
+MAX_STEPS=0
+MODEL_DIR=runs/models
+ATTN_MODE=learned
+DEVICE=cpu
+Train scenario: cf_obs15
+Eval scenario: cf_obs15_shuffle
+EXP_VERSION=v12
+CONTROLLED_VEHICLES=2
+SEEDS=[1]
+N_EVAL_EPISODES=100
+ATTN_MODE=learned
+DEVICE=cpu
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=0/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=5/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=10/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=15/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=20/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=25/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=30/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=35/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=40/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=45/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=50/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=55/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=60/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=65/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=70/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=75/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=80/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=85/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=90/100
+[mappo_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=95/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=0/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=5/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=10/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=15/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=20/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=25/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=30/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=35/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=40/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=45/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=50/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=55/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=60/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=65/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=70/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=75/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=80/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=85/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=90/100
+[mappo_attn_learned_cf_obs15_v12_cv2_seed1.pt] seed=1 ep=95/100
+
+MAPPO BASELINE
+  world_reward_return: 4.780 +/- 0.000
+  joint_return: 9.559 +/- 0.000
+  agent_return: 4.780 +/- 0.000
+  world_crash_rate: 1.000 +/- 0.000
+  agent_crash_rate: 0.610 +/- 0.000
+  world_success_rate: 0.000 +/- 0.000
+  mean_len: 14.290 +/- 0.000
+
+MAPPO ATTENTION (learned)
+  world_reward_return: -37.852 +/- 0.000
+  joint_return: -75.703 +/- 0.000
+  agent_return: -37.852 +/- 0.000
+  world_crash_rate: 0.030 +/- 0.000
+  agent_crash_rate: 0.015 +/- 0.000
+  world_success_rate: 0.000 +/- 0.000
+  mean_len: 146.100 +/- 0.000
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 171467 (gen_mappo_learned_cf_obs15_seed1_v12_e100) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Sun Mar 29 02:49:13 IST 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 171467
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: RUNNING
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:06:34
+CPU Efficiency: 12.79% of 00:51:20 core-walltime
+Job Wall-clock time: 00:06:25
+Memory Utilized: 376.15 MB
+Memory Efficiency: 2.30% of 16.00 GB (16.00 GB/node)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+171467       gen_mappo+         8             1                                                      00:06:25    RUNNING      0:0 
+171467.batch      batch         8      1      1    385176K    callan-n08       50.86M        0.01M   00:07:01  COMPLETED      0:0 
+171467.exte+     extern         8      1      1                                                      00:06:25    RUNNING      0:0 
+
+
+Job details:
+============
+
+JobId=171467 JobName=gen_mappo_learned_cf_obs15_seed1_v12_e100
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=100370 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=00:07:01 TimeLimit=1-00:00:00 TimeMin=N/A
+   SubmitTime=2026-03-28T20:02:54 EligibleTime=2026-03-28T22:19:34
+   AccrueTime=2026-03-28T22:19:34
+   StartTime=2026-03-29T02:42:12 EndTime=2026-03-29T02:49:13 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-03-29T02:42:12 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=callan01:1182475
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n08
+   BatchHost=callan-n08
+   NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=8,mem=16G,node=1,billing=8
+   AllocTRES=cpu=8,mem=16G,node=1,billing=8
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n08 CPU_IDs=30-31,55-60 Mem=16384 GRES=
+   MinCPUsNode=8 MinMemoryNode=16G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/eval_mappo_metrics.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/gen_mappo_learned_cf_obs15_seed1_v12_e100_171467.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/gen_mappo_learned_cf_obs15_seed1_v12_e100_171467.out
+   TresPerTask=cpu=8
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4984582          0          0       1660     none |   398697       0        0      959     none
+root       FILESET     5160220          0          0       4790     none |  9906244       0        0     1724     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot      13,712 | CALLAN_HADJITOT    13,712 |       300,000   286,288
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################

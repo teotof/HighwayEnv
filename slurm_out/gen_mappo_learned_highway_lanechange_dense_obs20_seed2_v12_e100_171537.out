@@ -1,0 +1,172 @@
+Loading Anaconda 3 2024.02-1
+TRAIN_SCENARIO_NAME=highway_lanechange_dense_obs20
+EVAL_SCENARIO_NAME=highway_lanechange_dense_obs20_shuffle
+EXP_VERSION=v12
+SEEDS=2
+CONTROLLED_VEHICLES=2
+N_EVAL_EPISODES=100
+MAX_STEPS=0
+MODEL_DIR=runs/models
+ATTN_MODE=learned
+DEVICE=cpu
+Train scenario: highway_lanechange_dense_obs20
+Eval scenario: highway_lanechange_dense_obs20_shuffle
+EXP_VERSION=v12
+CONTROLLED_VEHICLES=2
+SEEDS=[2]
+N_EVAL_EPISODES=100
+ATTN_MODE=learned
+DEVICE=cpu
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=0/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=5/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=10/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=15/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=20/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=25/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=30/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=35/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=40/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=45/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=50/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=55/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=60/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=65/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=70/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=75/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=80/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=85/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=90/100
+[mappo_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=95/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=0/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=5/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=10/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=15/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=20/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=25/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=30/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=35/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=40/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=45/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=50/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=55/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=60/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=65/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=70/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=75/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=80/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=85/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=90/100
+[mappo_attn_learned_highway_lanechange_dense_obs20_v12_cv2_seed2.pt] seed=2 ep=95/100
+
+MAPPO BASELINE
+  world_reward_return: 6.503 +/- 0.000
+  joint_return: 13.005 +/- 0.000
+  agent_return: 6.503 +/- 0.000
+  world_crash_rate: 0.990 +/- 0.000
+  agent_crash_rate: 0.500 +/- 0.000
+  world_success_rate: 0.000 +/- 0.000
+  mean_len: 23.800 +/- 0.000
+
+MAPPO ATTENTION (learned)
+  world_reward_return: 18.211 +/- 0.000
+  joint_return: 36.423 +/- 0.000
+  agent_return: 18.211 +/- 0.000
+  world_crash_rate: 0.940 +/- 0.000
+  agent_crash_rate: 0.470 +/- 0.000
+  world_success_rate: 0.000 +/- 0.000
+  mean_len: 54.930 +/- 0.000
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 171537 (gen_mappo_learned_highway_lanechange_dense_obs20_seed2_v12_e100) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Sun Mar 29 06:11:29 IST 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 171537
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 8
+CPU Utilized: 00:05:58
+CPU Efficiency: 10.31% of 00:57:52 core-walltime
+Job Wall-clock time: 00:07:14
+Memory Utilized: 579.84 MB
+Memory Efficiency: 3.54% of 16.00 GB (16.00 GB/node)
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+171537       gen_mappo+         8             1                                                      00:07:14  COMPLETED      0:0 
+171537.batch      batch         8      1      1    593760K    callan-n08       51.63M        0.01M   00:07:14  COMPLETED      0:0 
+171537.exte+     extern         8      1      1                                                      00:07:14  COMPLETED      0:0 
+
+
+Job details:
+============
+
+JobId=171537 JobName=gen_mappo_learned_highway_lanechange_dense_obs20_seed2_v12_e100
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=99366 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=00:07:14 TimeLimit=1-00:00:00 TimeMin=N/A
+   SubmitTime=2026-03-28T20:02:55 EligibleTime=2026-03-29T06:04:15
+   AccrueTime=Unknown
+   StartTime=2026-03-29T06:04:15 EndTime=2026-03-29T06:11:29 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-03-29T06:04:15 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=callan01:1182475
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n08
+   BatchHost=callan-n08
+   NumNodes=1 NumCPUs=8 NumTasks=1 CPUs/Task=8 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=8,mem=16G,node=1,billing=8
+   AllocTRES=cpu=8,mem=16G,node=1,billing=8
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n08 CPU_IDs=11,13-14,18-19,23-25 Mem=16384 GRES=
+   MinCPUsNode=8 MinMemoryNode=16G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/eval_mappo_metrics.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/gen_mappo_learned_highway_lanechange_dense_obs20_seed2_v12_e100_171537.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/gen_mappo_learned_highway_lanechange_dense_obs20_seed2_v12_e100_171537.out
+   TresPerTask=cpu=8
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4986887          0          0       1560     none |   398849       0        0      681     none
+root       FILESET     5120151          0          0       3750     none |  9882930       0        0     1258     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot      13,936 | CALLAN_HADJITOT    13,936 |       300,000   286,064
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################

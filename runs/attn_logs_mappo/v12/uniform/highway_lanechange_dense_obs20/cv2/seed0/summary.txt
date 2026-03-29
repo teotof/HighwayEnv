@@ -1,0 +1,29 @@
+steps=5000 agents=2 neighbours=19
+log_dir=runs/attn_logs_mappo/v12/uniform/highway_lanechange_dense_obs20/cv2/seed0
+AGGREGATE
+  T: 10000 N: 19
+  argmax==leader hit rate: 0.6021
+  mean attention on leader: 0.072082624
+  mean attention entropy: 2.6697614
+  argmax==ttc_critical hit rate: 0.498
+  mean attention on ttc_critical: 0.072082624
+  fraction steps with closing TTC candidate: 1.0
+  mean min TTC (closing steps only): 0.6034532189369202
+AGENT 0
+  T: 5000 N: 19
+  argmax==leader hit rate: 0.6248
+  mean attention on leader: 0.068454005
+  mean attention entropy: 2.7109263
+  argmax==ttc_critical hit rate: 0.5154
+  mean attention on ttc_critical: 0.068454005
+  fraction steps with closing TTC candidate: 1.0
+  mean min TTC (closing steps only): 0.6362712979316711
+AGENT 1
+  T: 5000 N: 19
+  argmax==leader hit rate: 0.5794
+  mean attention on leader: 0.075711235
+  mean attention entropy: 2.6285965
+  argmax==ttc_critical hit rate: 0.4806
+  mean attention on ttc_critical: 0.075711235
+  fraction steps with closing TTC candidate: 1.0
+  mean min TTC (closing steps only): 0.5706351399421692
