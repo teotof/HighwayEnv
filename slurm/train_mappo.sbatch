@@ -1,0 +1,76 @@
+#!/bin/bash
+#SBATCH -J mappo
+#SBATCH -p compute
+#SBATCH -n 1
+#SBATCH -c 16
+#SBATCH --mem=32G
+#SBATCH -t 2-00:00:00
+#SBATCH -o /home/users/hadjitot/fyp/HighwayEnv/slurm_out/%x_%j.out
+#SBATCH -e /home/users/hadjitot/fyp/HighwayEnv/slurm_out/%x_%j.err
+
+module purge
+module load anaconda3-2024.02-1
+eval "$(conda shell.bash hook)"
+conda activate highwayfyp
+
+cd /home/users/hadjitot/fyp/HighwayEnv
+export PYTHONPATH=$PWD
+export OMP_NUM_THREADS=1
+
+: "${SCENARIO_NAME:=cf_obs15}"
+: "${EXP_VERSION:=v11}"
+: "${TOTAL_TIMESTEPS:=1000000}"
+: "${SEEDS:=0,1,2}"
+: "${CONTROLLED_VEHICLES:=2}"
+: "${N_WORLDS:=4}"
+: "${VEC_MODE:=async}"
+: "${TARGET_ROLLOUT_SIZE:=16384}"
+: "${DEVICE:=cpu}"
+: "${MODEL_DIR:=runs/models}"
+: "${MONITOR_ROOT:=runs/monitor}"
+: "${TB_DIR:=runs/tb}"
+: "${REWARD_MODE:=team}"
+: "${HIDDEN_DIM:=128}"
+: "${LEARNING_RATE:=3e-4}"
+: "${GAMMA:=0.99}"
+: "${GAE_LAMBDA:=0.95}"
+: "${CLIP_RANGE:=0.2}"
+: "${ENT_COEF:=0.0}"
+: "${VF_COEF:=0.5}"
+: "${MAX_GRAD_NORM:=0.5}"
+: "${UPDATE_EPOCHS:=10}"
+: "${NUM_MINIBATCHES:=4}"
+: "${TARGET_KL:=}"
+: "${CLIP_VLOSS:=true}"
+export SCENARIO_NAME EXP_VERSION TOTAL_TIMESTEPS SEEDS CONTROLLED_VEHICLES
+export N_WORLDS VEC_MODE TARGET_ROLLOUT_SIZE DEVICE MODEL_DIR MONITOR_ROOT TB_DIR
+export REWARD_MODE HIDDEN_DIM LEARNING_RATE GAMMA GAE_LAMBDA CLIP_RANGE
+export ENT_COEF VF_COEF MAX_GRAD_NORM UPDATE_EPOCHS NUM_MINIBATCHES TARGET_KL CLIP_VLOSS
+
+echo "SCENARIO_NAME=$SCENARIO_NAME"
+echo "EXP_VERSION=$EXP_VERSION"
+echo "TOTAL_TIMESTEPS=$TOTAL_TIMESTEPS"
+echo "SEEDS=$SEEDS"
+echo "CONTROLLED_VEHICLES=$CONTROLLED_VEHICLES"
+echo "N_WORLDS=$N_WORLDS"
+echo "VEC_MODE=$VEC_MODE"
+echo "TARGET_ROLLOUT_SIZE=$TARGET_ROLLOUT_SIZE"
+echo "DEVICE=$DEVICE"
+echo "MODEL_DIR=$MODEL_DIR"
+echo "MONITOR_ROOT=$MONITOR_ROOT"
+echo "TB_DIR=$TB_DIR"
+echo "REWARD_MODE=$REWARD_MODE"
+echo "HIDDEN_DIM=$HIDDEN_DIM"
+echo "LEARNING_RATE=$LEARNING_RATE"
+echo "GAMMA=$GAMMA"
+echo "GAE_LAMBDA=$GAE_LAMBDA"
+echo "CLIP_RANGE=$CLIP_RANGE"
+echo "ENT_COEF=$ENT_COEF"
+echo "VF_COEF=$VF_COEF"
+echo "MAX_GRAD_NORM=$MAX_GRAD_NORM"
+echo "UPDATE_EPOCHS=$UPDATE_EPOCHS"
+echo "NUM_MINIBATCHES=$NUM_MINIBATCHES"
+echo "TARGET_KL=$TARGET_KL"
+echo "CLIP_VLOSS=$CLIP_VLOSS"
+
+python experiments/train_mappo.py

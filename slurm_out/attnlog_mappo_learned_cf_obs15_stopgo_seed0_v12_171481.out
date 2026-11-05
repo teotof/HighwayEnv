@@ -1,0 +1,140 @@
+Loading Anaconda 3 2024.02-1
+SCENARIO_NAME=cf_obs15_stopgo
+EXP_VERSION=v12
+SEED=0
+ATTN_MODE=learned
+CONTROLLED_VEHICLES=2
+MODEL_DIR=runs/models
+MODEL_PATH=
+STEPS=5000
+DEVICE=cpu
+SCENARIO_NAME=cf_obs15_stopgo SEED=0 ATTN_MODE=learned CONTROLLED_VEHICLES=2
+Resolved MODEL_PATH=/home/users/hadjitot/fyp/HighwayEnv/runs/models/mappo_attn_learned_cf_obs15_stopgo_v12_cv2_seed0.pt
+Per-agent env obs shape: (15, 5)
+Checkpoint policy_kind: attn
+Attention log steps: 5000
+Saved: (5000, 2, 14) (5000, 2, 14) (5000, 2, 14) (5000, 2, 14)
+steps=5000 agents=2 neighbours=14
+log_dir=runs/attn_logs_mappo/v12/learned/cf_obs15_stopgo/cv2/seed0
+AGGREGATE
+  T: 10000 N: 14
+  argmax==leader hit rate: 0.8938
+  mean attention on leader: 0.2867857
+  mean attention entropy: 1.0153495
+  argmax==ttc_critical hit rate: 0.9275
+  mean attention on ttc_critical: 0.2871532
+  fraction steps with closing TTC candidate: 0.23
+  mean min TTC (closing steps only): 2293.553955078125
+AGENT 0
+  T: 5000 N: 14
+  argmax==leader hit rate: 1.0
+  mean attention on leader: 0.22676736
+  mean attention entropy: 0.9730959
+  argmax==ttc_critical hit rate: 0.9942
+  mean attention on ttc_critical: 0.22675571
+  fraction steps with closing TTC candidate: 0.1726
+  mean min TTC (closing steps only): 20.045202255249023
+AGENT 1
+  T: 5000 N: 14
+  argmax==leader hit rate: 0.7876
+  mean attention on leader: 0.346804
+  mean attention entropy: 1.057603
+  argmax==ttc_critical hit rate: 0.8608
+  mean attention on ttc_critical: 0.34755072
+  fraction steps with closing TTC candidate: 0.2874
+  mean min TTC (closing steps only): 3658.9248046875
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 171481 (attnlog_mappo_learned_cf_obs15_stopgo_seed0_v12) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Sat Mar 28 23:24:45 GMT 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 171481
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 4
+CPU Utilized: 00:02:08
+CPU Efficiency: 19.75% of 00:10:48 core-walltime
+Job Wall-clock time: 00:02:42
+Memory Utilized: 596.64 MB
+Memory Efficiency: 7.28% of 8.00 GB (8.00 GB/node)
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+171481       attnlog_m+         4             1                                                      00:02:42  COMPLETED      0:0 
+171481.batch      batch         4      1      1    610964K    callan-n08       47.92M        0.01M   00:02:42  COMPLETED      0:0 
+171481.exte+     extern         4      1      1                                                      00:02:42  COMPLETED      0:0 
+
+
+Job details:
+============
+
+JobId=171481 JobName=attnlog_mappo_learned_cf_obs15_stopgo_seed0_v12
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=99299 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=00:02:42 TimeLimit=12:00:00 TimeMin=N/A
+   SubmitTime=2026-03-28T20:02:54 EligibleTime=2026-03-28T23:22:03
+   AccrueTime=Unknown
+   StartTime=2026-03-28T23:22:03 EndTime=2026-03-28T23:24:45 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-03-28T23:22:03 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=callan01:1182475
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n08
+   BatchHost=callan-n08
+   NumNodes=1 NumCPUs=4 NumTasks=1 CPUs/Task=4 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=4,mem=8G,node=1,billing=4
+   AllocTRES=cpu=4,mem=8G,node=1,billing=4
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n08 CPU_IDs=55-58 Mem=8192 GRES=
+   MinCPUsNode=4 MinMemoryNode=8G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/eval_mappo_attention.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/attnlog_mappo_learned_cf_obs15_stopgo_seed0_v12_171481.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/attnlog_mappo_learned_cf_obs15_stopgo_seed0_v12_171481.out
+   TresPerTask=cpu=4
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4981807          0          0       2098     none |   398610       0        0     1032     none
+root       FILESET     5174333          0          0       4658     none |  9910443       0        0     1715     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot      13,496 | CALLAN_HADJITOT    13,496 |       300,000   286,504
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################

@@ -1,0 +1,191 @@
+Loading Anaconda 3 2024.02-1
+SCENARIO_NAME=cf_obs15_stopgo
+EXP_VERSION=v12
+TOTAL_TIMESTEPS=1000000
+SEEDS=1
+CONTROLLED_VEHICLES=2
+N_WORLDS=4
+VEC_MODE=async
+TARGET_ROLLOUT_SIZE=16384
+DEVICE=cpu
+MODEL_DIR=runs/models
+MONITOR_ROOT=runs/monitor
+TB_DIR=runs/tb
+REWARD_MODE=team
+HIDDEN_DIM=128
+LEARNING_RATE=3e-4
+GAMMA=0.99
+GAE_LAMBDA=0.95
+CLIP_RANGE=0.2
+ENT_COEF=0.0
+VF_COEF=0.5
+MAX_GRAD_NORM=0.5
+UPDATE_EPOCHS=10
+NUM_MINIBATCHES=4
+TARGET_KL=
+CLIP_VLOSS=true
+ATTN_MODE=uniform
+X_INDEX=1
+VX_INDEX=3
+ORACLE_RULE=leader_x
+TTC_EPS=1e-6
+FEATURES_DIM=128
+D_MODEL=32
+mappo_attn_uniform_cf_obs15_stopgo_v12_cv2_seed1 agents: 2 agent obs shape: (15, 5) joint action space: Tuple(Box(-1.0, 1.0, (1,), float32), Box(-1.0, 1.0, (1,), float32))
+mappo_attn_uniform_cf_obs15_stopgo_v12_cv2_seed1: worlds=4, agents_per_world=2, ppo_slots=8, vec_mode=async, n_steps=2048, num_updates=61, total_timesteps_actual=999424, reward_mode=team, attn_mode=uniform, oracle_rule=leader_x
+update=1/61 global_step=16384 ep_rew_mean=4.490 ep_len_mean=13.760 policy_loss=0.0209 value_loss=5.4972 entropy=1.4187 approx_kl=0.00304 clipfrac=0.0056 explained_variance=-0.0006
+update=2/61 global_step=32768 ep_rew_mean=4.930 ep_len_mean=14.070 policy_loss=-0.0101 value_loss=5.1728 entropy=1.4148 approx_kl=0.00361 clipfrac=0.0074 explained_variance=0.0577
+update=3/61 global_step=49152 ep_rew_mean=5.068 ep_len_mean=14.350 policy_loss=0.0166 value_loss=4.4126 entropy=1.4099 approx_kl=0.00390 clipfrac=0.0132 explained_variance=0.1661
+update=4/61 global_step=65536 ep_rew_mean=5.070 ep_len_mean=14.330 policy_loss=0.0065 value_loss=3.7605 entropy=1.4047 approx_kl=0.00411 clipfrac=0.0206 explained_variance=0.2996
+update=5/61 global_step=81920 ep_rew_mean=5.069 ep_len_mean=14.930 policy_loss=0.0044 value_loss=2.9312 entropy=1.4012 approx_kl=0.00378 clipfrac=0.0086 explained_variance=0.4443
+update=6/61 global_step=98304 ep_rew_mean=5.418 ep_len_mean=15.250 policy_loss=0.0076 value_loss=2.4645 entropy=1.3968 approx_kl=0.00225 clipfrac=0.0064 explained_variance=0.5413
+update=7/61 global_step=114688 ep_rew_mean=5.625 ep_len_mean=15.810 policy_loss=0.0148 value_loss=1.9220 entropy=1.3906 approx_kl=0.00231 clipfrac=0.0232 explained_variance=0.6441
+update=8/61 global_step=131072 ep_rew_mean=5.469 ep_len_mean=16.120 policy_loss=0.0326 value_loss=1.5953 entropy=1.3818 approx_kl=0.00638 clipfrac=0.0261 explained_variance=0.7004
+update=9/61 global_step=147456 ep_rew_mean=5.877 ep_len_mean=16.540 policy_loss=-0.0091 value_loss=1.3065 entropy=1.3757 approx_kl=0.00438 clipfrac=0.0326 explained_variance=0.7525
+update=10/61 global_step=163840 ep_rew_mean=5.919 ep_len_mean=16.890 policy_loss=0.0054 value_loss=1.1531 entropy=1.3698 approx_kl=0.00819 clipfrac=0.0518 explained_variance=0.7866
+update=11/61 global_step=180224 ep_rew_mean=6.041 ep_len_mean=18.270 policy_loss=-0.0268 value_loss=1.3258 entropy=1.3659 approx_kl=0.00300 clipfrac=0.0325 explained_variance=0.7779
+update=12/61 global_step=196608 ep_rew_mean=6.020 ep_len_mean=18.720 policy_loss=-0.0075 value_loss=3.8312 entropy=1.3611 approx_kl=0.00364 clipfrac=0.0430 explained_variance=0.4868
+update=13/61 global_step=212992 ep_rew_mean=5.888 ep_len_mean=21.080 policy_loss=-0.0162 value_loss=3.4342 entropy=1.3555 approx_kl=0.00491 clipfrac=0.0412 explained_variance=0.5158
+update=14/61 global_step=229376 ep_rew_mean=5.854 ep_len_mean=21.690 policy_loss=0.0039 value_loss=9.5622 entropy=1.3508 approx_kl=0.00436 clipfrac=0.0274 explained_variance=0.1701
+update=15/61 global_step=245760 ep_rew_mean=3.805 ep_len_mean=29.010 policy_loss=-0.0235 value_loss=15.1041 entropy=1.3466 approx_kl=0.00385 clipfrac=0.0165 explained_variance=-0.0159
+update=16/61 global_step=262144 ep_rew_mean=0.895 ep_len_mean=37.110 policy_loss=-0.0237 value_loss=22.4147 entropy=1.3421 approx_kl=0.00156 clipfrac=0.0077 explained_variance=-0.0692
+update=17/61 global_step=278528 ep_rew_mean=-6.249 ep_len_mean=57.980 policy_loss=0.0121 value_loss=30.2889 entropy=1.3395 approx_kl=0.00003 clipfrac=0.0000 explained_variance=-0.0367
+update=18/61 global_step=294912 ep_rew_mean=-7.046 ep_len_mean=59.400 policy_loss=-0.0002 value_loss=30.8351 entropy=1.3361 approx_kl=0.00382 clipfrac=0.0072 explained_variance=-0.0014
+update=19/61 global_step=311296 ep_rew_mean=-14.783 ep_len_mean=79.810 policy_loss=-0.0030 value_loss=33.9414 entropy=1.3335 approx_kl=0.00216 clipfrac=0.0014 explained_variance=0.0651
+update=20/61 global_step=327680 ep_rew_mean=-16.968 ep_len_mean=84.160 policy_loss=0.0001 value_loss=34.0887 entropy=1.3309 approx_kl=0.00123 clipfrac=0.0098 explained_variance=0.1337
+update=21/61 global_step=344064 ep_rew_mean=-21.370 ep_len_mean=94.890 policy_loss=0.0082 value_loss=35.5098 entropy=1.3295 approx_kl=0.00304 clipfrac=0.0099 explained_variance=0.1457
+update=22/61 global_step=360448 ep_rew_mean=-26.776 ep_len_mean=109.240 policy_loss=0.0088 value_loss=34.2695 entropy=1.3277 approx_kl=0.00053 clipfrac=0.0038 explained_variance=0.2292
+update=23/61 global_step=376832 ep_rew_mean=-23.722 ep_len_mean=101.810 policy_loss=0.0183 value_loss=33.2841 entropy=1.3267 approx_kl=0.00340 clipfrac=0.0067 explained_variance=0.2542
+update=24/61 global_step=393216 ep_rew_mean=-28.313 ep_len_mean=112.500 policy_loss=0.0031 value_loss=32.8866 entropy=1.3256 approx_kl=0.00046 clipfrac=0.0016 explained_variance=0.2896
+update=25/61 global_step=409600 ep_rew_mean=-29.656 ep_len_mean=115.620 policy_loss=-0.0262 value_loss=31.4949 entropy=1.3256 approx_kl=0.00272 clipfrac=0.0075 explained_variance=0.3257
+update=26/61 global_step=425984 ep_rew_mean=-36.679 ep_len_mean=132.090 policy_loss=-0.0104 value_loss=32.5119 entropy=1.3234 approx_kl=0.00019 clipfrac=0.0006 explained_variance=0.3433
+update=27/61 global_step=442368 ep_rew_mean=-44.200 ep_len_mean=150.470 policy_loss=0.0074 value_loss=31.9587 entropy=1.3210 approx_kl=0.00243 clipfrac=0.0068 explained_variance=0.3580
+update=28/61 global_step=458752 ep_rew_mean=-46.189 ep_len_mean=154.700 policy_loss=0.0012 value_loss=29.8913 entropy=1.3197 approx_kl=0.00195 clipfrac=0.0102 explained_variance=0.4025
+update=29/61 global_step=475136 ep_rew_mean=-40.321 ep_len_mean=139.450 policy_loss=0.0163 value_loss=27.8521 entropy=1.3205 approx_kl=0.00109 clipfrac=0.0100 explained_variance=0.4619
+update=30/61 global_step=491520 ep_rew_mean=-39.574 ep_len_mean=138.030 policy_loss=-0.0001 value_loss=26.3077 entropy=1.3199 approx_kl=0.00299 clipfrac=0.0020 explained_variance=0.4942
+update=31/61 global_step=507904 ep_rew_mean=-43.159 ep_len_mean=147.180 policy_loss=0.0232 value_loss=27.0033 entropy=1.3159 approx_kl=0.00309 clipfrac=0.0082 explained_variance=0.5063
+update=32/61 global_step=524288 ep_rew_mean=-42.419 ep_len_mean=145.690 policy_loss=0.0038 value_loss=24.0295 entropy=1.3161 approx_kl=0.00140 clipfrac=0.0001 explained_variance=0.5393
+update=33/61 global_step=540672 ep_rew_mean=-41.214 ep_len_mean=142.780 policy_loss=0.0014 value_loss=23.4270 entropy=1.3146 approx_kl=0.00119 clipfrac=0.0019 explained_variance=0.5656
+update=34/61 global_step=557056 ep_rew_mean=-43.367 ep_len_mean=147.190 policy_loss=0.0017 value_loss=22.7701 entropy=1.3149 approx_kl=0.00106 clipfrac=0.0038 explained_variance=0.5776
+update=35/61 global_step=573440 ep_rew_mean=-42.816 ep_len_mean=145.670 policy_loss=0.0008 value_loss=21.4706 entropy=1.3128 approx_kl=0.00229 clipfrac=0.0058 explained_variance=0.6072
+update=36/61 global_step=589824 ep_rew_mean=-42.223 ep_len_mean=144.160 policy_loss=0.0064 value_loss=20.7378 entropy=1.3112 approx_kl=0.00417 clipfrac=0.0088 explained_variance=0.6193
+update=37/61 global_step=606208 ep_rew_mean=-41.000 ep_len_mean=140.860 policy_loss=0.0251 value_loss=19.5350 entropy=1.3083 approx_kl=0.00304 clipfrac=0.0026 explained_variance=0.6395
+update=38/61 global_step=622592 ep_rew_mean=-40.692 ep_len_mean=140.930 policy_loss=0.0110 value_loss=18.7364 entropy=1.3052 approx_kl=0.00061 clipfrac=0.0031 explained_variance=0.6541
+update=39/61 global_step=638976 ep_rew_mean=-43.002 ep_len_mean=146.860 policy_loss=-0.0078 value_loss=17.5009 entropy=1.3020 approx_kl=0.00221 clipfrac=0.0105 explained_variance=0.6568
+update=40/61 global_step=655360 ep_rew_mean=-37.447 ep_len_mean=133.110 policy_loss=-0.0059 value_loss=16.5237 entropy=1.3012 approx_kl=0.00014 clipfrac=0.0000 explained_variance=0.7050
+update=41/61 global_step=671744 ep_rew_mean=-33.424 ep_len_mean=124.230 policy_loss=0.0214 value_loss=15.6049 entropy=1.3023 approx_kl=0.00196 clipfrac=0.0056 explained_variance=0.7083
+update=42/61 global_step=688128 ep_rew_mean=-26.929 ep_len_mean=108.710 policy_loss=0.0084 value_loss=14.2138 entropy=1.3027 approx_kl=0.00160 clipfrac=0.0125 explained_variance=0.7449
+update=43/61 global_step=704512 ep_rew_mean=-22.364 ep_len_mean=98.150 policy_loss=0.0070 value_loss=13.3949 entropy=1.3022 approx_kl=0.00145 clipfrac=0.0023 explained_variance=0.7694
+update=44/61 global_step=720896 ep_rew_mean=-19.360 ep_len_mean=90.940 policy_loss=-0.0088 value_loss=12.4761 entropy=1.3011 approx_kl=0.00172 clipfrac=0.0048 explained_variance=0.7785
+update=45/61 global_step=737280 ep_rew_mean=-14.746 ep_len_mean=80.390 policy_loss=-0.0208 value_loss=11.9916 entropy=1.3003 approx_kl=0.00358 clipfrac=0.0220 explained_variance=0.7955
+update=46/61 global_step=753664 ep_rew_mean=-9.964 ep_len_mean=67.040 policy_loss=0.0076 value_loss=10.7133 entropy=1.2996 approx_kl=0.00150 clipfrac=0.0005 explained_variance=0.8172
+update=47/61 global_step=770048 ep_rew_mean=-8.016 ep_len_mean=60.770 policy_loss=0.0122 value_loss=10.5469 entropy=1.2997 approx_kl=0.00453 clipfrac=0.0051 explained_variance=0.8166
+update=48/61 global_step=786432 ep_rew_mean=-1.412 ep_len_mean=43.860 policy_loss=0.0197 value_loss=8.3850 entropy=1.3004 approx_kl=0.00042 clipfrac=0.0070 explained_variance=0.8431
+update=49/61 global_step=802816 ep_rew_mean=-5.616 ep_len_mean=56.240 policy_loss=0.0108 value_loss=9.2257 entropy=1.3008 approx_kl=0.00239 clipfrac=0.0088 explained_variance=0.8409
+update=50/61 global_step=819200 ep_rew_mean=1.817 ep_len_mean=35.980 policy_loss=0.0151 value_loss=5.7390 entropy=1.3026 approx_kl=0.00031 clipfrac=0.0000 explained_variance=0.8771
+update=51/61 global_step=835584 ep_rew_mean=2.510 ep_len_mean=34.230 policy_loss=-0.0130 value_loss=6.5103 entropy=1.3024 approx_kl=0.00029 clipfrac=0.0001 explained_variance=0.8808
+update=52/61 global_step=851968 ep_rew_mean=1.620 ep_len_mean=35.140 policy_loss=0.0153 value_loss=5.9277 entropy=1.3016 approx_kl=0.00719 clipfrac=0.0175 explained_variance=0.8830
+update=53/61 global_step=868352 ep_rew_mean=5.528 ep_len_mean=23.420 policy_loss=-0.0031 value_loss=3.0576 entropy=1.3008 approx_kl=0.00394 clipfrac=0.0144 explained_variance=0.9017
+update=54/61 global_step=884736 ep_rew_mean=5.813 ep_len_mean=21.230 policy_loss=-0.0157 value_loss=1.8060 entropy=1.3017 approx_kl=0.00258 clipfrac=0.0017 explained_variance=0.9017
+update=55/61 global_step=901120 ep_rew_mean=6.492 ep_len_mean=19.570 policy_loss=-0.0062 value_loss=1.1666 entropy=1.3015 approx_kl=0.00036 clipfrac=0.0000 explained_variance=0.8808
+update=56/61 global_step=917504 ep_rew_mean=5.972 ep_len_mean=18.700 policy_loss=-0.0019 value_loss=1.4190 entropy=1.2999 approx_kl=0.00446 clipfrac=0.0116 explained_variance=0.8851
+update=57/61 global_step=933888 ep_rew_mean=5.931 ep_len_mean=18.240 policy_loss=-0.0103 value_loss=1.3097 entropy=1.2998 approx_kl=0.00224 clipfrac=0.0006 explained_variance=0.8605
+update=58/61 global_step=950272 ep_rew_mean=6.298 ep_len_mean=18.910 policy_loss=0.0102 value_loss=0.9011 entropy=1.2974 approx_kl=0.00112 clipfrac=0.0001 explained_variance=0.9062
+update=59/61 global_step=966656 ep_rew_mean=6.053 ep_len_mean=18.120 policy_loss=-0.0177 value_loss=0.7935 entropy=1.2964 approx_kl=0.00042 clipfrac=0.0000 explained_variance=0.9004
+update=60/61 global_step=983040 ep_rew_mean=6.004 ep_len_mean=18.110 policy_loss=0.0149 value_loss=0.9942 entropy=1.2957 approx_kl=0.00270 clipfrac=0.0004 explained_variance=0.9105
+update=61/61 global_step=999424 ep_rew_mean=6.083 ep_len_mean=18.790 policy_loss=0.0155 value_loss=1.3929 entropy=1.2951 approx_kl=0.00154 clipfrac=0.0046 explained_variance=0.9069
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 171485 (mappo_uniform_cf_obs15_stopgo_seed1_v12) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Sun Mar 29 00:09:19 GMT 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 171485
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 03:21:33
+CPU Efficiency: 20.39% of 16:28:32 core-walltime
+Job Wall-clock time: 01:01:47
+Memory Utilized: 862.16 MB
+Memory Efficiency: 2.63% of 32.00 GB (32.00 GB/node)
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+171485       mappo_uni+        16             1                                                      01:01:47  COMPLETED      0:0 
+171485.batch      batch        16      1      1    882856K    callan-n09      782.98M      723.00M   01:01:47  COMPLETED      0:0 
+171485.exte+     extern        16      1      1                                                      01:01:47  COMPLETED      0:0 
+
+
+Job details:
+============
+
+JobId=171485 JobName=mappo_uniform_cf_obs15_stopgo_seed1_v12
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=100412 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=01:01:47 TimeLimit=2-00:00:00 TimeMin=N/A
+   SubmitTime=2026-03-28T20:02:54 EligibleTime=2026-03-28T20:02:54
+   AccrueTime=2026-03-28T20:02:54
+   StartTime=2026-03-28T23:07:32 EndTime=2026-03-29T00:09:19 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-03-28T23:07:32 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=callan01:1182475
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n09
+   BatchHost=callan-n09
+   NumNodes=1 NumCPUs=16 NumTasks=1 CPUs/Task=16 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=16,mem=32G,node=1,billing=16
+   AllocTRES=cpu=16,mem=32G,node=1,billing=16
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n09 CPU_IDs=24-31,40-44,53,58,60 Mem=32768 GRES=
+   MinCPUsNode=16 MinMemoryNode=32G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/train_mappo_attention.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/mappo_uniform_cf_obs15_stopgo_seed1_v12_171485.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/mappo_uniform_cf_obs15_stopgo_seed1_v12_171485.out
+   TresPerTask=cpu=16
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4983301          0          0       1876     none |   398635       0        0      867     none
+root       FILESET     5174008          0          0       4629     none |  9906030       0        0     1631     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot      13,561 | CALLAN_HADJITOT    13,561 |       300,000   286,439
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################

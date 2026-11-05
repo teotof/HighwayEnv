@@ -1,0 +1,34 @@
+#!/bin/bash
+#SBATCH -J base
+#SBATCH -p compute
+#SBATCH -n 1
+#SBATCH -c 16
+#SBATCH --mem=32G
+#SBATCH -t 2-00:00:00
+#SBATCH -o /home/users/hadjitot/fyp/HighwayEnv/slurm_out/%x_%j.out
+#SBATCH -e /home/users/hadjitot/fyp/HighwayEnv/slurm_out/%x_%j.err
+
+module purge
+module load anaconda3-2024.02-1
+eval "$(conda shell.bash hook)"
+conda activate highwayfyp
+
+cd /home/users/hadjitot/fyp/HighwayEnv
+export PYTHONPATH=$PWD
+export OMP_NUM_THREADS=1
+
+: "${TRAIN_SCENARIO_NAME:=cf_v2}"
+: "${EVAL_SCENARIO_NAME:=$TRAIN_SCENARIO_NAME}"
+: "${EXP_VERSION:=v2}"
+: "${MODEL_KIND:=attn}"
+: "${ATTN_MODE:=}"
+export TRAIN_SCENARIO_NAME EVAL_SCENARIO_NAME EXP_VERSION MODEL_KIND ATTN_MODE
+
+echo "TRAIN_SCENARIO_NAME=$TRAIN_SCENARIO_NAME"
+echo "EVAL_SCENARIO_NAME=$EVAL_SCENARIO_NAME"
+echo "EXP_VERSION=$EXP_VERSION"
+echo "MODEL_KIND=$MODEL_KIND"
+echo "ATTN_MODE=${ATTN_MODE:-legacy-name}"
+
+python experiments/eval_metrics.py
+

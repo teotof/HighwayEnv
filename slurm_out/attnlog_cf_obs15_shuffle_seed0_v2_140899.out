@@ -1,0 +1,113 @@
+Loading Anaconda 3 2024.02-1
+Loading Anaconda 3 2024.02-1
+SCENARIO_NAME=cf_obs15_shuffle
+SEED=0
+EXP_VERSION=v2
+MODEL_PATH=runs/models/ppo_attn_cf_obs15_shuffle_v2_seed0.zip
+STEPS=100000
+OUT_DIR=runs/attn_logs/cf_obs15_shuffle/seed0
+SCENARIO_NAME=cf_obs15_shuffle SEED=0
+Resolved MODEL_PATH=/home/users/hadjitot/fyp/HighwayEnv/runs/models/ppo_attn_cf_obs15_shuffle_v2_seed0.zip
+Env obs shape: (15, 5)
+Model obs shape: (15, 5)
+Saved: (100000, 14) (100000, 14) (100000, 14)
+T: 100000 N: 14
+argmax==leader hit rate: 0.82382
+mean attention on leader: 0.27894112
+mean attention entropy: 1.8056129
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 140899 (attnlog_cf_obs15_shuffle_seed0_v2) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Thu Feb 19 01:36:57 GMT 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 140899
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: RUNNING
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 05:49:05
+CPU Efficiency: 6.24% of 3-21:11:12 core-walltime
+Job Wall-clock time: 05:49:27
+Memory Utilized: 557.98 MB
+Memory Efficiency: 1.70% of 32.00 GB (32.00 GB/node)
+WARNING: Efficiency statistics can only be obtained after the job has ended as seff tool is based on the accounting database data.
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+140899       attnlog_c+        16             1                                                      05:50:01  COMPLETED      0:0 
+140899.batch      batch        16      1      1    571372K    callan-n06       85.84M       16.03M   05:50:01  COMPLETED      0:0 
+140899.exte+     extern        16      1      1                                                      05:50:01  COMPLETED      0:0 
+
+
+Job details:
+============
+
+JobId=140899 JobName=attnlog_cf_obs15_shuffle_seed0_v2
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=112734 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=05:50:01 TimeLimit=2-00:00:00 TimeMin=N/A
+   SubmitTime=2026-02-18T19:22:20 EligibleTime=2026-02-18T19:22:20
+   AccrueTime=2026-02-18T19:22:20
+   StartTime=2026-02-18T19:46:56 EndTime=2026-02-19T01:36:57 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-02-18T19:46:56 Scheduler=Backfill
+   Partition=compute AllocNode:Sid=callan01:3896046
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n06
+   BatchHost=callan-n06
+   NumNodes=1 NumCPUs=16 NumTasks=1 CPUs/Task=16 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=16,mem=32G,node=1,billing=16
+   AllocTRES=cpu=16,mem=32G,node=1,billing=16
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n06 CPU_IDs=35-41,51-59 Mem=32768 GRES=
+   MinCPUsNode=16 MinMemoryNode=32G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/eval_attention.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/attnlog_cf_obs15_shuffle_seed0_v2_140899.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/attnlog_cf_obs15_shuffle_seed0_v2_140899.out
+   TresPerTask=cpu=16
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4779094          0          0        238     none |   364104       0        0      259     none
+root       FILESET     4826968          0          0       2464     none |  9484806       0        0      742     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot       8,761 | CALLAN_HADJITOT     8,761 |       300,000   291,239
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################

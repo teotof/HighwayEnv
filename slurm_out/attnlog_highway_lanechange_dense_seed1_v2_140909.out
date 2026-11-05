@@ -1,0 +1,112 @@
+Loading Anaconda 3 2024.02-1
+Loading Anaconda 3 2024.02-1
+SCENARIO_NAME=highway_lanechange_dense
+SEED=1
+EXP_VERSION=v2
+MODEL_PATH=runs/models/ppo_attn_highway_lanechange_dense_v2_seed1.zip
+STEPS=100000
+OUT_DIR=runs/attn_logs/highway_lanechange_dense/seed1
+SCENARIO_NAME=highway_lanechange_dense SEED=1
+Resolved MODEL_PATH=/home/users/hadjitot/fyp/HighwayEnv/runs/models/ppo_attn_highway_lanechange_dense_v2_seed1.zip
+Env obs shape: (15, 5)
+Model obs shape: (15, 5)
+Saved: (100000, 14) (100000, 14) (100000, 14)
+T: 100000 N: 14
+argmax==leader hit rate: 0.96228
+mean attention on leader: 0.09198994
+mean attention entropy: 2.4923859
+
+
+###############################################################################
+TCHPC Cluster: callan
+Job 140909 (attnlog_highway_lanechange_dense_seed1_v2) for User 'hadjitot' in Account 'callan_hadjitot'
+Finished at: Thu Feb 19 01:45:20 GMT 2026
+
+Job efficiency estimates:
+=========================
+
+Job ID: 140909
+Cluster: callan
+User/Group: hadjitot/hadjitot
+State: COMPLETED (exit code 0)
+Nodes: 1
+Cores per node: 16
+CPU Utilized: 05:49:43
+CPU Efficiency: 6.23% of 3-21:33:52 core-walltime
+Job Wall-clock time: 05:50:52
+Memory Utilized: 557.25 MB
+Memory Efficiency: 1.70% of 32.00 GB (32.00 GB/node)
+
+Job completion status:
+======================
+
+JobID           JobName AllocCPUS NTasks NNodes     MaxRSS    MaxRSSNode  MaxDiskRead MaxDiskWrite    Elapsed      State ExitCode 
+------------ ---------- --------- ------ ------ ---------- ------------- ------------ ------------ ---------- ---------- -------- 
+140909       attnlog_h+        16             1                                                      05:50:52  COMPLETED      0:0 
+140909.batch      batch        16      1      1    570628K    callan-n04       61.29M        0.01M   05:50:52  COMPLETED      0:0 
+140909.exte+     extern        16      1      1                                                      05:50:52  COMPLETED      0:0 
+
+
+Job details:
+============
+
+JobId=140909 JobName=attnlog_highway_lanechange_dense_seed1_v2
+   UserId=hadjitot(2357) GroupId=hadjitot(2300) MCS_label=N/A
+   Priority=112769 Nice=0 Account=callan_hadjitot QOS=normal
+   JobState=COMPLETING Reason=None Dependency=(null)
+   Requeue=0 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+   DerivedExitCode=0:0
+   RunTime=05:50:52 TimeLimit=2-00:00:00 TimeMin=N/A
+   SubmitTime=2026-02-18T19:22:20 EligibleTime=2026-02-18T19:22:20
+   AccrueTime=2026-02-18T19:22:20
+   StartTime=2026-02-18T19:54:28 EndTime=2026-02-19T01:45:20 Deadline=N/A
+   SuspendTime=None SecsPreSuspend=0 LastSchedEval=2026-02-18T19:54:28 Scheduler=Main
+   Partition=compute AllocNode:Sid=callan01:3896046
+   ReqNodeList=(null) ExcNodeList=(null)
+   NodeList=callan-n04
+   BatchHost=callan-n04
+   NumNodes=1 NumCPUs=16 NumTasks=1 CPUs/Task=16 ReqB:S:C:T=0:0:*:*
+   ReqTRES=cpu=16,mem=32G,node=1,billing=16
+   AllocTRES=cpu=16,mem=32G,node=1,billing=16
+   Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+   JOB_GRES=(null)
+     Nodes=callan-n04 CPU_IDs=32-34,37-49 Mem=32768 GRES=
+   MinCPUsNode=16 MinMemoryNode=32G MinTmpDiskNode=0
+   Features=(null) DelayBoot=00:00:00
+   OverSubscribe=OK Contiguous=0 Licenses=(null) LicensesAlloc=(null) Network=(null)
+   Command=/home/users/hadjitot/fyp/HighwayEnv/slurm/eval_attention.sbatch
+   WorkDir=/home/users/hadjitot/fyp/HighwayEnv
+   StdErr=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/attnlog_highway_lanechange_dense_seed1_v2_140909.err
+   StdIn=/dev/null
+   StdOut=/home/users/hadjitot/fyp/HighwayEnv/slurm_out/attnlog_highway_lanechange_dense_seed1_v2_140909.out
+   TresPerTask=cpu=16
+   
+
+
+Disk quota details:
+===================
+
+                         Block Limits                                    |                     File Limits
+Name       type             MB      quota      limit   in_doubt    grace |    files   quota    limit in_doubt    grace
+root       USR         4779140          0          0        144     none |   364112       0        0      223     none
+root       FILESET     4826978          0          0       2472     none |  9484846       0        0      647     none
+
+
+SLURM Bank Statement:
+=====================
+
+User           Usage |        Account     Usage | Account Limit Available (CPU hrs)
+---------- --------- + -------------- --------- + ------------- ---------
+hadjitot       8,772 | CALLAN_HADJITOT     8,772 |       300,000   291,228
+
+
+Acknowledgements:
+=================
+
+Note that usage of TCHPC Resources *must* be acknowledged in all publications.
+
+Please see this page for details relevant to this cluster:
+
+http://www.tchpc.tcd.ie/resources/acknowledgementpolicy
+
+################################################################################
